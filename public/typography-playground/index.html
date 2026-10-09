@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Typography Playground // Handmade Textile &amp; Woven Letters</title>
+  <!-- Google Fonts: Authentic Loom Woven Fonts (Jacquard 12 & 24) + Chunky Variable Font (Fraunces with WONK/SOFT) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,100..900,0..100,0..1;1,9..144,100..900,0..100,0..1&family=Jacquard+12&family=Jacquard+24&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="mode-bouncy font-jacquard-12 texture-on">
+
+  <!-- SVG Filters for Authentic Tactile Fiber Roughness & Woven Edges -->
+  <svg class="svg-filters" width="0" height="0" aria-hidden="true" style="position: absolute; pointer-events: none;">
+    <defs>
+      <!-- Filter 1: Organic Yarn Fiber Edge Turbulence -->
+      <filter id="yarn-roughness" x="-10%" y="-10%" width="120%" height="120%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.045" numOctaves="3" result="noise" />
+        <feDisplacementMap in="SourceGraphic" in2="noise" scale="3.2" xChannelSelector="R" yChannelSelector="G" />
+      </filter>
+
+      <!-- Filter 2: Heavy Stepped Loom Woven Distortion for Extra Chunky Mode -->
+      <filter id="woven-displacement" x="-10%" y="-10%" width="120%" height="120%">
+        <feTurbulence type="turbulence" baseFrequency="0.08" numOctaves="2" result="stitch" />
+        <feDisplacementMap in="SourceGraphic" in2="stitch" scale="5" xChannelSelector="B" yChannelSelector="G" />
+      </filter>
+    </defs>
+  </svg>
+
+  <div class="playground-layout">
+    <!-- Minimalist Craft Header -->
+    <header class="app-header">
+      <div class="header-left">
+        <span class="craft-badge">HANDMADE TEXTILE LAB</span>
+        <h1 class="app-title">TYPOGRAPHY <span>PLAYGROUND</span></h1>
+        <p class="app-subtitle">&ldquo;Words can have personalities too.&rdquo;</p>
+      </div>
+
+      <div class="header-right">
+        <!-- Audio Synthesizer Toggle -->
+        <button id="soundToggleBtn" class="pill-btn sound-btn" title="Toggle tactile woolly sound effects">
+          <span class="sound-icon">🔔</span>
+          <span class="sound-label">Sound: ON</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Top Input Bar (Minimalist Sentence Input & Craft Presets) -->
+    <section class="input-deck">
+      <div class="input-row">
+        <label for="sentenceInput" class="input-label">TYPE YOUR SENTENCE (CREATING LIVING OBJECTS):</label>
+        <div class="input-box">
+          <input
+            type="text"
+            id="sentenceInput"
+            value="WEAVING & SOLVING"
+            maxlength="36"
+            spellcheck="false"
+            autocomplete="off"
+            placeholder="Type your sentence..."
+          >
+          <button id="clearInputBtn" class="btn-clear" title="Clear text">&times;</button>
+        </div>
+      </div>
+
+      <!-- Quick Preset Suggestions Inspired by the Reference Poster -->
+      <div class="presets-row">
+        <span class="preset-tag">TRY THESE:</span>
+        <div class="preset-buttons">
+          <button class="preset-chip active" data-text="WEAVING & SOLVING">Weaving &amp; Solving</button>
+          <button class="preset-chip" data-text="HANDMADE OBJECTS">Handmade Objects</button>
+          <button class="preset-chip" data-text="TACTILE WORDS">Tactile Words</button>
+          <button class="preset-chip" data-text="KNITTED DANCE">Knitted Dance</button>
+          <button class="preset-chip" data-text="SOFT YARN WORLD">Soft Yarn World</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Main Canvas Poster Stage (Occupies Most of the Screen) -->
+    <main class="poster-stage" id="posterStage">
+      <div class="poster-canvas" id="posterCanvas">
+        <!-- Editorial Margin Annotations (Inspired by Seoul Handmade Fair Poster) -->
+        <aside class="poster-margin left-margin" aria-hidden="true">
+          <span>HANDMADE CRAFT &bull; EDITION № 2026</span>
+          <span>WEFT &bull; WARP &bull; FIBER</span>
+        </aside>
+
+        <aside class="poster-margin right-margin" aria-hidden="true">
+          <span>서울국제핸드메이드 &bull; WEAVING &amp; SOLVING</span>
+        </aside>
+
+        <!-- Central Typographic Artwork Container -->
+        <div class="artwork-viewport" id="artworkViewport">
+          <div class="text-container" id="textContainer">
+            <!-- Dynamically populated chunky letter objects -->
+          </div>
+        </div>
+
+        <!-- Stage Bottom Info & Mouse Coordinate Status -->
+        <footer class="poster-footer">
+          <div class="interaction-status" id="interactionStatus">
+            <span class="status-indicator">✦</span>
+            <span class="status-text">CURRENT MODE: BOUNCY (Gently moving soft objects)</span>
+          </div>
+          <div class="mouse-hint">
+            <span>&harr; Mouse X: Letter Width/Stretch &bull; &varr; Mouse Y: Weight (Light to Chunky)</span>
+          </div>
+        </footer>
+      </div>
+    </main>
+
+    <!-- Bottom Controls Deck (7 Modes, MAKE IT WEIRD, Typeface & Tactile Settings) -->
+    <footer class="bottom-controls">
+      <!-- 7 Typographic Behaviors Bar -->
+      <div class="modes-panel">
+        <span class="panel-label">TYPOGRAPHIC BEHAVIOR:</span>
+        <div class="mode-buttons-strip">
+          <button class="mode-button active" data-mode="bouncy" title="Letters gently move up and down as soft objects">
+            <span class="mode-icon">🐰</span>
+            <span class="mode-name">BOUNCY</span>
+          </button>
+          <button class="mode-button" data-mode="wiggly" title="Each letter slightly rotates and deforms independently">
+            <span class="mode-icon">〰</span>
+            <span class="mode-name">WIGGLY</span>
+          </button>
+          <button class="mode-button" data-mode="handmade" title="Random width, height, rotation & spacing for an imperfect craft layout">
+            <span class="mode-icon">✂️</span>
+            <span class="mode-name">HANDMADE</span>
+          </button>
+          <button class="mode-button" data-mode="wave" title="Arrange letters along a large organic wave">
+            <span class="mode-icon">🌊</span>
+            <span class="mode-name">WAVE</span>
+          </button>
+          <button class="mode-button" data-mode="circle" title="Arrange letters around an imperfect hand-drawn circular loop">
+            <span class="mode-icon">🧶</span>
+            <span class="mode-name">CIRCLE</span>
+          </button>
+          <button class="mode-button" data-mode="melt" title="Letters stretch vertically & horizontally like soft pulled wool">
+            <span class="mode-icon">🫠</span>
+            <span class="mode-name">MELT</span>
+          </button>
+          <button class="mode-button" data-mode="stack" title="Overlap and stack into a dense poster grid (like Weaving & Solving poster)">
+            <span class="mode-icon">▦</span>
+            <span class="mode-name">STACK</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Action Row: MAKE IT WEIRD! and Craft Controls -->
+      <div class="action-panel">
+        <!-- THE BIG PLAYFUL "MAKE IT WEIRD!" BUTTON -->
+        <button id="makeItWeirdBtn" class="weird-button" title="Randomize letter size, rotation, spacing, distortion, and colors!">
+          <span class="btn-icon">🎲</span>
+          <span class="btn-label">MAKE IT WEIRD!</span>
+          <span class="btn-sparkle">✦</span>
+        </button>
+
+        <!-- Secondary Craft Controls -->
+        <div class="craft-controls">
+          <!-- Typeface Style -->
+          <div class="control-group">
+            <span class="group-label">TYPEFACE:</span>
+            <div class="segmented-control">
+              <button class="seg-btn active" data-font="jacquard-12" title="Authentic Stepped Loom Woven Tapestry Serif">Woven 12</button>
+              <button class="seg-btn" data-font="jacquard-24" title="High-Density Woven Tapestry Serif">Woven 24</button>
+              <button class="seg-btn" data-font="fraunces" title="Chunky Wonky Variable Serif (WONK/SOFT axes)">Chunky Yarn</button>
+            </div>
+          </div>
+
+          <!-- Yarn Texture Toggle -->
+          <button id="textureToggleBtn" class="pill-btn active" title="Toggle visible knitted thread ribbing texture">
+            <span>Yarn Texture: ON</span>
+          </button>
+
+          <!-- Reset Button -->
+          <button id="resetAllBtn" class="pill-btn reset-btn" title="Reset all randomized values to default">
+            ↺ Reset
+          </button>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

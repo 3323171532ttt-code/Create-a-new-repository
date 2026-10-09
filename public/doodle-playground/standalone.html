@@ -1,0 +1,1051 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>3D Doodle Studio - Neon Ribbons with Three.js</title>
+  <style>
+    :root {
+      --bg-dark: #07090e;
+      --panel-bg: rgba(14, 18, 28, 0.78);
+      --panel-border: rgba(0, 240, 255, 0.22);
+      --cyan: #00f0ff;
+      --magenta: #ff0077;
+      --lime: #39ff14;
+      --gold: #ffaa00;
+      --purple: #9d00ff;
+      --text-main: #f0f6fc;
+      --text-muted: #8b949e;
+    }
+
+    * {
+      box-sizing: border-box;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    body, html {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background-color: var(--bg-dark);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      color: var(--text-main);
+    }
+
+    #canvas-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    }
+
+    .top-hud {
+      position: absolute;
+      top: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      background: var(--panel-bg);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid var(--panel-border);
+      padding: 8px 20px;
+      border-radius: 30px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), 0 0 20px rgba(0, 240, 255, 0.1);
+    }
+
+    .brand-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      background: linear-gradient(135deg, #ffffff 10%, var(--cyan) 90%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .brand-badge {
+      font-size: 10px;
+      padding: 2px 6px;
+      border-radius: 12px;
+      background: rgba(0, 240, 255, 0.15);
+      border: 1px solid rgba(0, 240, 255, 0.4);
+      color: var(--cyan);
+    }
+
+    .mode-toggle {
+      display: flex;
+      background: rgba(0, 0, 0, 0.4);
+      padding: 3px;
+      border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .mode-btn {
+      padding: 6px 14px;
+      border: none;
+      background: transparent;
+      color: var(--text-muted);
+      font-size: 12px;
+      font-weight: 600;
+      border-radius: 16px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .mode-btn.active {
+      background: var(--cyan);
+      color: #07090e;
+      box-shadow: 0 0 14px rgba(0, 240, 255, 0.5);
+    }
+
+    .studio-panel {
+      position: absolute;
+      top: 76px;
+      left: 20px;
+      z-index: 10;
+      width: 270px;
+      background: var(--panel-bg);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid var(--panel-border);
+      border-radius: 16px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.5);
+    }
+
+    .panel-section {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .section-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-muted);
+    }
+
+    .palette-row {
+      display: flex;
+      gap: 8px;
+    }
+
+    .color-dot {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+    }
+
+    .color-dot:hover {
+      transform: scale(1.15);
+    }
+
+    .color-dot.active {
+      border-color: #fff;
+      transform: scale(1.15);
+      box-shadow: 0 0 12px var(--dot-color, var(--cyan));
+    }
+
+    .rainbow-dot {
+      background: linear-gradient(135deg, #ff0077, #ffaa00, #39ff14, #00f0ff, #9d00ff);
+    }
+
+    .style-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+    }
+
+    .style-btn {
+      padding: 8px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--text-main);
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-align: center;
+    }
+
+    .style-btn:hover {
+      background: rgba(0, 240, 255, 0.15);
+      border-color: var(--cyan);
+    }
+
+    .style-btn.active {
+      background: rgba(0, 240, 255, 0.25);
+      border-color: var(--cyan);
+      color: var(--cyan);
+      box-shadow: 0 0 10px rgba(0, 240, 255, 0.3);
+    }
+
+    .slider-item {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .slider-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    input[type="range"] {
+      width: 100%;
+      accent-color: var(--cyan);
+      cursor: pointer;
+    }
+
+    .checkbox-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 12px;
+      color: var(--text-main);
+      cursor: pointer;
+    }
+
+    .actions-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    .action-btn {
+      padding: 9px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: var(--text-main);
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .action-btn:hover {
+      background: rgba(255, 255, 255, 0.15);
+      border-color: rgba(255, 255, 255, 0.3);
+      transform: translateY(-1px);
+    }
+
+    .action-btn.danger:hover {
+      background: rgba(255, 60, 60, 0.25);
+      border-color: #ff4d4d;
+      color: #ff8080;
+    }
+
+    .bottom-hint {
+      position: absolute;
+      bottom: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: rgba(10, 14, 22, 0.7);
+      backdrop-filter: blur(8px);
+      padding: 6px 16px;
+      border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      font-size: 11px;
+      color: var(--text-muted);
+      pointer-events: none;
+    }
+
+    .bottom-hint kbd {
+      background: rgba(255, 255, 255, 0.15);
+      padding: 2px 6px;
+      border-radius: 4px;
+      color: var(--cyan);
+      font-family: inherit;
+    }
+  </style>
+  <!-- Three.js Import Map -->
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://unpkg.com/three@0.170.0/build/three.module.js",
+        "three/addons/": "https://unpkg.com/three@0.170.0/examples/jsm/"
+      }
+    }
+  </script>
+</head>
+<body>
+  <div id="canvas-container"></div>
+
+  <header class="top-hud">
+    <div class="brand-title">
+      <span>3D Doodle Studio</span>
+      <span class="brand-badge">Three.js</span>
+    </div>
+
+    <div class="mode-toggle">
+      <button id="mode-draw" class="mode-btn active">Draw Mode</button>
+      <button id="mode-inspect" class="mode-btn">Inspect Mode</button>
+    </div>
+  </header>
+
+  <aside class="studio-panel">
+    <div class="panel-section">
+      <span class="section-label">Neon Palette</span>
+      <div class="palette-row">
+        <div class="color-dot active" style="background-color: #00f0ff; --dot-color: #00f0ff;" data-color="#00f0ff" title="Cyber Cyan"></div>
+        <div class="color-dot" style="background-color: #ff0077; --dot-color: #ff0077;" data-color="#ff0077" title="Electric Magenta"></div>
+        <div class="color-dot" style="background-color: #39ff14; --dot-color: #39ff14;" data-color="#39ff14" title="Acid Lime"></div>
+        <div class="color-dot" style="background-color: #ffaa00; --dot-color: #ffaa00;" data-color="#ffaa00" title="Solar Amber"></div>
+        <div class="color-dot" style="background-color: #9d00ff; --dot-color: #9d00ff;" data-color="#9d00ff" title="Plasma Violet"></div>
+        <div class="color-dot rainbow-dot" data-rainbow="true" title="Prism Rainbow"></div>
+      </div>
+    </div>
+
+    <div class="panel-section">
+      <span class="section-label">Ribbon Geometry</span>
+      <div class="style-grid">
+        <button class="style-btn active" data-style="strip">Flat Strip</button>
+        <button class="style-btn" data-style="twisted">Helix Twist</button>
+        <button class="style-btn" data-style="faceted">Crystal Prism</button>
+        <button class="style-btn" data-style="tube">Glow Tube</button>
+      </div>
+    </div>
+
+    <div class="panel-section">
+      <span class="section-label">Brush Controls</span>
+      <div class="slider-item">
+        <div class="slider-label">
+          <span>Width</span>
+          <span id="width-val">0.8</span>
+        </div>
+        <input type="range" id="width-slider" min="0.2" max="2.5" step="0.1" value="0.8" />
+      </div>
+
+      <div class="slider-item">
+        <div class="slider-label">
+          <span>Glow Intensity</span>
+          <span id="glow-val">1.5</span>
+        </div>
+        <input type="range" id="glow-slider" min="0.5" max="3.5" step="0.1" value="1.5" />
+      </div>
+
+      <div class="slider-item">
+        <div class="slider-label">
+          <span>Depth Plane</span>
+          <span id="depth-val">0.0</span>
+        </div>
+        <input type="range" id="depth-slider" min="-8" max="8" step="0.5" value="0" />
+      </div>
+    </div>
+
+    <div class="panel-section">
+      <span class="section-label">Environment</span>
+      <label class="checkbox-row">
+        <span>Zero-G Wave Float</span>
+        <input type="checkbox" id="wave-toggle" checked />
+      </label>
+      <label class="checkbox-row">
+        <span>Turntable Auto-Rotate</span>
+        <input type="checkbox" id="rotate-toggle" />
+      </label>
+      <label class="checkbox-row">
+        <span>Spatial Grid</span>
+        <input type="checkbox" id="grid-toggle" checked />
+      </label>
+    </div>
+
+    <div class="panel-section">
+      <span class="section-label">3D Sculptures</span>
+      <div class="style-grid">
+        <button class="style-btn" id="preset-torus">Mobius Knot</button>
+        <button class="style-btn" id="preset-spire">Twin Spire</button>
+        <button class="style-btn" id="preset-spiral">Quantum Ring</button>
+      </div>
+    </div>
+
+    <div class="panel-section">
+      <div class="actions-grid">
+        <button class="action-btn" id="btn-undo">Undo</button>
+        <button class="action-btn danger" id="btn-clear">Clear</button>
+        <button class="action-btn" id="btn-reset-cam">Reset View</button>
+        <button class="action-btn" id="btn-snapshot">Snapshot</button>
+      </div>
+    </div>
+  </aside>
+
+  <div class="bottom-hint">
+    <span><kbd>Left Drag</kbd> Draw Ribbon</span>
+    <span>•</span>
+    <span><kbd>Right Drag / Touch</kbd> Orbit 360°</span>
+    <span>•</span>
+    <span><kbd>Scroll</kbd> Zoom</span>
+    <span>•</span>
+    <span><kbd>Space</kbd> Toggle Mode</span>
+  </div>
+
+  <script type="module">
+    import * as THREE from 'three';
+    import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+    // --- RibbonMeshBuilder ---
+    class RibbonMeshBuilder {
+      static buildRibbon(points, options) {
+        if (points.length < 2) return null;
+
+        const cleanPoints = [points[0]];
+        for (let i = 1; i < points.length; i++) {
+          if (points[i].distanceTo(cleanPoints[cleanPoints.length - 1]) > 0.05) {
+            cleanPoints.push(points[i]);
+          }
+        }
+        if (cleanPoints.length < 2) return null;
+
+        const curve = new THREE.CatmullRomCurve3(cleanPoints, false, 'catmullrom', 0.5);
+        const numSegments = Math.max(16, Math.min(250, cleanPoints.length * 8));
+        const samplePoints = curve.getSpacedPoints(numSegments);
+
+        const group = new THREE.Group();
+        const baseColor = new THREE.Color(options.color);
+        let mainMesh;
+
+        switch (options.style) {
+          case 'tube': {
+            const tubeGeo = new THREE.TubeGeometry(curve, numSegments, options.width * 0.35, 12, false);
+            this.applyVertexColors(tubeGeo, options);
+            const mat = new THREE.MeshStandardMaterial({
+              roughness: 0.15,
+              metalness: 0.2,
+              emissive: baseColor,
+              emissiveIntensity: options.glowIntensity,
+              vertexColors: options.isRainbow
+            });
+            mainMesh = new THREE.Mesh(tubeGeo, mat);
+            break;
+          }
+          case 'faceted': {
+            const prismGeo = new THREE.TubeGeometry(curve, numSegments, options.width * 0.45, 4, false);
+            prismGeo.computeVertexNormals();
+            this.applyVertexColors(prismGeo, options);
+            const mat = new THREE.MeshStandardMaterial({
+              flatShading: true,
+              roughness: 0.1,
+              metalness: 0.8,
+              emissive: baseColor,
+              emissiveIntensity: options.glowIntensity * 0.85,
+              vertexColors: options.isRainbow
+            });
+            mainMesh = new THREE.Mesh(prismGeo, mat);
+
+            const wireMat = new THREE.MeshBasicMaterial({
+              color: options.isRainbow ? 0xffffff : baseColor,
+              wireframe: true,
+              transparent: true,
+              opacity: 0.4
+            });
+            group.add(new THREE.Mesh(prismGeo, wireMat));
+            break;
+          }
+          case 'twisted': {
+            const geo = this.createStripGeometry(samplePoints, options.width, true);
+            this.applyVertexColors(geo, options);
+            const mat = new THREE.MeshStandardMaterial({
+              side: THREE.DoubleSide,
+              roughness: 0.2,
+              metalness: 0.3,
+              emissive: baseColor,
+              emissiveIntensity: options.glowIntensity,
+              vertexColors: options.isRainbow
+            });
+            mainMesh = new THREE.Mesh(geo, mat);
+            break;
+          }
+          case 'strip':
+          default: {
+            const geo = this.createStripGeometry(samplePoints, options.width, false);
+            this.applyVertexColors(geo, options);
+            const mat = new THREE.MeshStandardMaterial({
+              side: THREE.DoubleSide,
+              roughness: 0.25,
+              metalness: 0.2,
+              emissive: baseColor,
+              emissiveIntensity: options.glowIntensity,
+              vertexColors: options.isRainbow
+            });
+            mainMesh = new THREE.Mesh(geo, mat);
+            break;
+          }
+        }
+
+        mainMesh.castShadow = true;
+        mainMesh.receiveShadow = true;
+        group.add(mainMesh);
+
+        return {
+          mesh: group,
+          wavePhase: Math.random() * Math.PI * 2,
+          waveSpeed: 1.2 + Math.random() * 0.8,
+          waveAmp: 0.12 + Math.random() * 0.08
+        };
+      }
+
+      static createStripGeometry(points, width, isTwisted) {
+        const geo = new THREE.BufferGeometry();
+        const vertices = [];
+        const normals = [];
+        const uvs = [];
+        const indices = [];
+
+        const numPoints = points.length;
+        let up = new THREE.Vector3(0, 1, 0);
+
+        for (let i = 0; i < numPoints; i++) {
+          const p = points[i];
+          const tangent = new THREE.Vector3();
+          if (i < numPoints - 1) {
+            tangent.subVectors(points[i + 1], p).normalize();
+          } else {
+            tangent.subVectors(p, points[i - 1]).normalize();
+          }
+
+          let binormal = new THREE.Vector3().crossVectors(tangent, up).normalize();
+          if (binormal.lengthSq() < 0.001) {
+            binormal = new THREE.Vector3(1, 0, 0);
+          }
+          up = new THREE.Vector3().crossVectors(binormal, tangent).normalize();
+
+          if (isTwisted) {
+            const twistAngle = (i / numPoints) * Math.PI * 4;
+            binormal.applyAxisAngle(tangent, twistAngle);
+          }
+
+          const halfW = width * 0.5;
+          const left = p.clone().addScaledVector(binormal, halfW);
+          const right = p.clone().addScaledVector(binormal, -halfW);
+
+          vertices.push(left.x, left.y, left.z);
+          vertices.push(right.x, right.y, right.z);
+
+          const norm = new THREE.Vector3().crossVectors(tangent, binormal).normalize();
+          normals.push(norm.x, norm.y, norm.z);
+          normals.push(norm.x, norm.y, norm.z);
+
+          const u = i / (numPoints - 1);
+          uvs.push(u, 0);
+          uvs.push(u, 1);
+
+          if (i < numPoints - 1) {
+            const v0 = i * 2;
+            const v1 = i * 2 + 1;
+            const v2 = (i + 1) * 2;
+            const v3 = (i + 1) * 2 + 1;
+
+            indices.push(v0, v1, v2);
+            indices.push(v1, v3, v2);
+          }
+        }
+
+        geo.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
+        geo.setAttribute('normal', new THREE.Float32BufferAttribute(normals, 3));
+        geo.setAttribute('uv', new THREE.Float32BufferAttribute(uvs, 2));
+        geo.setIndex(indices);
+        return geo;
+      }
+
+      static applyVertexColors(geo, options) {
+        const posAttr = geo.getAttribute('position');
+        if (!posAttr) return;
+
+        const count = posAttr.count;
+        const colors = new Float32Array(count * 3);
+        const baseColor = new THREE.Color(options.color);
+        const tempColor = new THREE.Color();
+
+        for (let i = 0; i < count; i++) {
+          if (options.isRainbow) {
+            const hue = (i / count) % 1.0;
+            tempColor.setHSL(hue, 1.0, 0.55);
+            colors[i * 3] = tempColor.r;
+            colors[i * 3 + 1] = tempColor.g;
+            colors[i * 3 + 2] = tempColor.b;
+          } else {
+            colors[i * 3] = baseColor.r;
+            colors[i * 3 + 1] = baseColor.g;
+            colors[i * 3 + 2] = baseColor.b;
+          }
+        }
+
+        geo.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+      }
+    }
+
+    // --- Studio Scene ---
+    class StudioScene {
+      constructor(container) {
+        this.clock = new THREE.Clock();
+        this.ribbons = [];
+        this.waveMotionEnabled = true;
+
+        this.scene = new THREE.Scene();
+        this.scene.background = new THREE.Color(0x06080d);
+        this.scene.fog = new THREE.FogExp2(0x06080d, 0.015);
+
+        const width = container.clientWidth || window.innerWidth;
+        const height = container.clientHeight || window.innerHeight;
+        this.camera = new THREE.PerspectiveCamera(50, width / height, 0.1, 1000);
+        this.camera.position.set(0, 8, 22);
+
+        this.renderer = new THREE.WebGLRenderer({
+          antialias: true,
+          powerPreference: 'high-performance',
+          preserveDrawingBuffer: true
+        });
+        this.renderer.setSize(width, height);
+        this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        this.renderer.toneMapping = THREE.ACESFilmicToneMapping;
+        this.renderer.toneMappingExposure = 1.2;
+        this.renderer.shadowMap.enabled = true;
+        container.appendChild(this.renderer.domElement);
+
+        this.controls = new OrbitControls(this.camera, this.renderer.domElement);
+        this.controls.enableDamping = true;
+        this.controls.dampingFactor = 0.05;
+        this.controls.maxDistance = 80;
+        this.controls.minDistance = 3;
+        this.controls.target.set(0, 2, 0);
+        this.controls.update();
+
+        this.setupLighting();
+
+        this.grid = new THREE.GridHelper(50, 50, 0x00f0ff, 0x141f33);
+        this.grid.position.y = -2;
+        this.scene.add(this.grid);
+
+        this.starParticles = this.createStarfield();
+        this.scene.add(this.starParticles);
+
+        window.addEventListener('resize', () => {
+          const w = container.clientWidth || window.innerWidth;
+          const h = container.clientHeight || window.innerHeight;
+          this.camera.aspect = w / h;
+          this.camera.updateProjectionMatrix();
+          this.renderer.setSize(w, h);
+        });
+
+        this.animate();
+      }
+
+      setupLighting() {
+        const ambient = new THREE.AmbientLight(0x223344, 0.8);
+        this.scene.add(ambient);
+
+        const dirLight = new THREE.DirectionalLight(0xffffff, 1.2);
+        dirLight.position.set(10, 20, 15);
+        this.scene.add(dirLight);
+
+        const cyanLight = new THREE.PointLight(0x00f0ff, 3.0, 30);
+        cyanLight.position.set(-12, 10, 8);
+        this.scene.add(cyanLight);
+
+        const magentaLight = new THREE.PointLight(0xff0077, 3.0, 30);
+        magentaLight.position.set(12, -4, -8);
+        this.scene.add(magentaLight);
+      }
+
+      createStarfield() {
+        const count = 600;
+        const geo = new THREE.BufferGeometry();
+        const positions = new Float32Array(count * 3);
+        const colors = new Float32Array(count * 3);
+
+        for (let i = 0; i < count; i++) {
+          positions[i * 3] = (Math.random() - 0.5) * 80;
+          positions[i * 3 + 1] = Math.random() * 50 - 5;
+          positions[i * 3 + 2] = (Math.random() - 0.5) * 80;
+
+          const isCyan = Math.random() > 0.4;
+          colors[i * 3] = isCyan ? 0.3 : 0.9;
+          colors[i * 3 + 1] = isCyan ? 0.9 : 0.95;
+          colors[i * 3 + 2] = 1.0;
+        }
+
+        geo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+        geo.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+
+        return new THREE.Points(geo, new THREE.PointsMaterial({
+          size: 0.18,
+          vertexColors: true,
+          transparent: true,
+          opacity: 0.6
+        }));
+      }
+
+      addRibbon(ribbon) {
+        this.ribbons.push(ribbon);
+        this.scene.add(ribbon.mesh);
+      }
+
+      removeLastRibbon() {
+        const last = this.ribbons.pop();
+        if (last) this.scene.remove(last.mesh);
+      }
+
+      clearAllRibbons() {
+        for (const r of this.ribbons) this.scene.remove(r.mesh);
+        this.ribbons = [];
+      }
+
+      resetCamera() {
+        this.camera.position.set(0, 8, 22);
+        this.controls.target.set(0, 2, 0);
+        this.controls.update();
+      }
+
+      captureSnapshot() {
+        this.renderer.render(this.scene, this.camera);
+        return this.renderer.domElement.toDataURL('image/png');
+      }
+
+      animate = () => {
+        requestAnimationFrame(this.animate);
+        const elapsed = this.clock.getElapsedTime();
+        this.controls.update();
+
+        this.starParticles.rotation.y = elapsed * 0.015;
+
+        if (this.waveMotionEnabled) {
+          for (const ribbon of this.ribbons) {
+            ribbon.mesh.position.y = Math.sin(elapsed * ribbon.waveSpeed + ribbon.wavePhase) * ribbon.waveAmp;
+            ribbon.mesh.rotation.y = Math.sin(elapsed * 0.4 + ribbon.wavePhase) * 0.03;
+          }
+        }
+
+        this.renderer.render(this.scene, this.camera);
+      };
+    }
+
+    // --- Drawing Engine ---
+    class DrawingEngine {
+      constructor(studio, domElement) {
+        this.studio = studio;
+        this.domElement = domElement;
+        this.raycaster = new THREE.Raycaster();
+        this.mousePos = new THREE.Vector2();
+        this.drawPlane = new THREE.Plane();
+        this.isDrawing = false;
+        this.strokePoints = [];
+        this.livePreviewMesh = null;
+
+        this.mode = 'draw';
+        this.currentOptions = {
+          color: '#00f0ff',
+          isRainbow: false,
+          width: 0.8,
+          style: 'strip',
+          glowIntensity: 1.5
+        };
+        this.drawDepth = 0;
+
+        this.updateControlsForMode();
+
+        this.domElement.addEventListener('pointerdown', this.onPointerDown);
+        window.addEventListener('pointermove', this.onPointerMove);
+        window.addEventListener('pointerup', this.onPointerUp);
+        this.domElement.addEventListener('contextmenu', (e) => e.preventDefault());
+      }
+
+      setMode(mode) {
+        this.mode = mode;
+        this.updateControlsForMode();
+      }
+
+      updateControlsForMode() {
+        if (this.mode === 'draw') {
+          this.studio.controls.mouseButtons = {
+            LEFT: -1,
+            MIDDLE: THREE.MOUSE.DOLLY,
+            RIGHT: THREE.MOUSE.ROTATE
+          };
+          this.domElement.style.cursor = 'crosshair';
+        } else {
+          this.studio.controls.mouseButtons = {
+            LEFT: THREE.MOUSE.ROTATE,
+            MIDDLE: THREE.MOUSE.DOLLY,
+            RIGHT: THREE.MOUSE.PAN
+          };
+          this.domElement.style.cursor = 'grab';
+        }
+      }
+
+      updateMousePos(event) {
+        const rect = this.domElement.getBoundingClientRect();
+        this.mousePos.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+        this.mousePos.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
+      }
+
+      onPointerDown = (event) => {
+        if (this.mode !== 'draw' || event.button !== 0) return;
+
+        this.updateMousePos(event);
+        this.raycaster.setFromCamera(this.mousePos, this.studio.camera);
+
+        const cameraDir = new THREE.Vector3();
+        this.studio.camera.getWorldDirection(cameraDir);
+
+        const planePoint = this.studio.controls.target.clone().addScaledVector(cameraDir, -this.drawDepth);
+        this.drawPlane.setFromNormalAndCoplanarPoint(cameraDir.clone().negate(), planePoint);
+
+        const hit = new THREE.Vector3();
+        if (this.raycaster.ray.intersectPlane(this.drawPlane, hit)) {
+          this.isDrawing = true;
+          this.strokePoints = [hit];
+          this.createLivePreview();
+        }
+      };
+
+      onPointerMove = (event) => {
+        if (!this.isDrawing) return;
+
+        this.updateMousePos(event);
+        this.raycaster.setFromCamera(this.mousePos, this.studio.camera);
+
+        const hit = new THREE.Vector3();
+        if (this.raycaster.ray.intersectPlane(this.drawPlane, hit)) {
+          const lastPoint = this.strokePoints[this.strokePoints.length - 1];
+          if (!lastPoint || hit.distanceTo(lastPoint) > 0.15) {
+            this.strokePoints.push(hit);
+            this.updateLivePreview();
+          }
+        }
+      };
+
+      onPointerUp = () => {
+        if (!this.isDrawing) return;
+        this.isDrawing = false;
+        this.removeLivePreview();
+
+        if (this.strokePoints.length >= 2) {
+          const ribbon = RibbonMeshBuilder.buildRibbon(this.strokePoints, this.currentOptions);
+          if (ribbon) this.studio.addRibbon(ribbon);
+        }
+        this.strokePoints = [];
+      };
+
+      createLivePreview() {
+        const geo = new THREE.BufferGeometry();
+        const mat = new THREE.LineBasicMaterial({
+          color: this.currentOptions.isRainbow ? 0x00f0ff : new THREE.Color(this.currentOptions.color),
+          linewidth: 3
+        });
+        this.livePreviewMesh = new THREE.Line(geo, mat);
+        this.studio.scene.add(this.livePreviewMesh);
+      }
+
+      updateLivePreview() {
+        if (!this.livePreviewMesh) return;
+        const positions = new Float32Array(this.strokePoints.length * 3);
+        for (let i = 0; i < this.strokePoints.length; i++) {
+          positions[i * 3] = this.strokePoints[i].x;
+          positions[i * 3 + 1] = this.strokePoints[i].y;
+          positions[i * 3 + 2] = this.strokePoints[i].z;
+        }
+        this.livePreviewMesh.geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+      }
+
+      removeLivePreview() {
+        if (this.livePreviewMesh) {
+          this.studio.scene.remove(this.livePreviewMesh);
+          this.livePreviewMesh = null;
+        }
+      }
+    }
+
+    // --- Presets ---
+    const Presets = {
+      loadTorusKnot(studio) {
+        studio.clearAllRibbons();
+        const p = 3, q = 4, count = 120;
+        const points = [];
+        for (let i = 0; i <= count; i++) {
+          const u = (i / count) * Math.PI * 2;
+          const r = 4 + 1.8 * Math.cos(q * u);
+          const x = r * Math.cos(p * u);
+          const y = r * Math.sin(p * u) + 2;
+          const z = 2.4 * Math.sin(q * u);
+          points.push(new THREE.Vector3(x, y, z));
+        }
+        const ribbon = RibbonMeshBuilder.buildRibbon(points, {
+          color: '#00f0ff',
+          isRainbow: true,
+          width: 0.9,
+          style: 'twisted',
+          glowIntensity: 1.8
+        });
+        if (ribbon) studio.addRibbon(ribbon);
+      },
+
+      loadHelixSpire(studio) {
+        studio.clearAllRibbons();
+        const turns = 3.5, count = 90;
+        const points1 = [], points2 = [];
+        for (let i = 0; i <= count; i++) {
+          const t = i / count;
+          const angle = t * Math.PI * 2 * turns;
+          const radius = 3.5 * (1 - t * 0.4);
+          const y = t * 14 - 3;
+          points1.push(new THREE.Vector3(Math.cos(angle) * radius, y, Math.sin(angle) * radius));
+          points2.push(new THREE.Vector3(Math.cos(angle + Math.PI) * radius, y, Math.sin(angle + Math.PI) * radius));
+        }
+        const r1 = RibbonMeshBuilder.buildRibbon(points1, { color: '#00f0ff', isRainbow: false, width: 0.7, style: 'strip', glowIntensity: 1.6 });
+        const r2 = RibbonMeshBuilder.buildRibbon(points2, { color: '#ff0077', isRainbow: false, width: 0.7, style: 'faceted', glowIntensity: 1.6 });
+        if (r1) studio.addRibbon(r1);
+        if (r2) studio.addRibbon(r2);
+      },
+
+      loadQuantumSpiral(studio) {
+        studio.clearAllRibbons();
+        const count = 100;
+        const points = [];
+        for (let i = 0; i <= count; i++) {
+          const t = (i / count) * Math.PI * 4;
+          const r = 2.0 + (i / count) * 4.5;
+          const x = Math.cos(t) * r;
+          const z = Math.sin(t) * r;
+          const y = Math.sin(t * 2) * 1.8 + 2;
+          points.push(new THREE.Vector3(x, y, z));
+        }
+        const ribbon = RibbonMeshBuilder.buildRibbon(points, { color: '#39ff14', isRainbow: false, width: 1.1, style: 'faceted', glowIntensity: 1.8 });
+        if (ribbon) studio.addRibbon(ribbon);
+      }
+    };
+
+    // --- App Init ---
+    const container = document.getElementById('canvas-container');
+    const studio = new StudioScene(container);
+    const drawingEngine = new DrawingEngine(studio, container);
+
+    const modeDrawBtn = document.getElementById('mode-draw');
+    const modeInspectBtn = document.getElementById('mode-inspect');
+    const colorDots = document.querySelectorAll('.color-dot');
+    const styleBtns = document.querySelectorAll('.style-btn');
+    const widthSlider = document.getElementById('width-slider');
+    const widthVal = document.getElementById('width-val');
+    const glowSlider = document.getElementById('glow-slider');
+    const glowVal = document.getElementById('glow-val');
+    const depthSlider = document.getElementById('depth-slider');
+    const depthVal = document.getElementById('depth-val');
+    const waveToggle = document.getElementById('wave-toggle');
+    const rotateToggle = document.getElementById('rotate-toggle');
+    const gridToggle = document.getElementById('grid-toggle');
+    const undoBtn = document.getElementById('btn-undo');
+    const clearBtn = document.getElementById('btn-clear');
+    const resetCamBtn = document.getElementById('btn-reset-cam');
+    const snapshotBtn = document.getElementById('btn-snapshot');
+
+    const setMode = (mode) => {
+      drawingEngine.setMode(mode);
+      if (mode === 'draw') {
+        modeDrawBtn.classList.add('active');
+        modeInspectBtn.classList.remove('active');
+      } else {
+        modeDrawBtn.classList.remove('active');
+        modeInspectBtn.classList.add('active');
+      }
+    };
+
+    modeDrawBtn.addEventListener('click', () => setMode('draw'));
+    modeInspectBtn.addEventListener('click', () => setMode('inspect'));
+
+    colorDots.forEach((dot) => {
+      dot.addEventListener('click', () => {
+        colorDots.forEach((d) => d.classList.remove('active'));
+        dot.classList.add('active');
+        drawingEngine.currentOptions.isRainbow = dot.getAttribute('data-rainbow') === 'true';
+        drawingEngine.currentOptions.color = dot.getAttribute('data-color') || '#00f0ff';
+      });
+    });
+
+    styleBtns.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        styleBtns.forEach((b) => b.classList.remove('active'));
+        btn.classList.add('active');
+        drawingEngine.currentOptions.style = btn.getAttribute('data-style') || 'strip';
+      });
+    });
+
+    widthSlider.addEventListener('input', () => {
+      const val = parseFloat(widthSlider.value);
+      drawingEngine.currentOptions.width = val;
+      widthVal.textContent = val.toFixed(1);
+    });
+
+    glowSlider.addEventListener('input', () => {
+      const val = parseFloat(glowSlider.value);
+      drawingEngine.currentOptions.glowIntensity = val;
+      glowVal.textContent = val.toFixed(1);
+    });
+
+    depthSlider.addEventListener('input', () => {
+      const val = parseFloat(depthSlider.value);
+      drawingEngine.drawDepth = val;
+      depthVal.textContent = val > 0 ? `+${val.toFixed(1)}` : val.toFixed(1);
+    });
+
+    waveToggle.addEventListener('change', () => {
+      studio.waveMotionEnabled = !!waveToggle.checked;
+    });
+
+    rotateToggle.addEventListener('change', () => {
+      studio.controls.autoRotate = !!rotateToggle.checked;
+      studio.controls.autoRotateSpeed = 1.8;
+    });
+
+    gridToggle.addEventListener('change', () => {
+      studio.grid.visible = !!gridToggle.checked;
+    });
+
+    document.getElementById('preset-torus').addEventListener('click', () => Presets.loadTorusKnot(studio));
+    document.getElementById('preset-spire').addEventListener('click', () => Presets.loadHelixSpire(studio));
+    document.getElementById('preset-spiral').addEventListener('click', () => Presets.loadQuantumSpiral(studio));
+
+    undoBtn.addEventListener('click', () => studio.removeLastRibbon());
+    clearBtn.addEventListener('click', () => studio.clearAllRibbons());
+    resetCamBtn.addEventListener('click', () => studio.resetCamera());
+    snapshotBtn.addEventListener('click', () => {
+      const link = document.createElement('a');
+      link.download = `3d-doodle-${Date.now()}.png`;
+      link.href = studio.captureSnapshot();
+      link.click();
+    });
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'z' && (e.ctrlKey || e.metaKey)) studio.removeLastRibbon();
+      else if (e.key === ' ') setMode(drawingEngine.mode === 'draw' ? 'inspect' : 'draw');
+    });
+
+    Presets.loadTorusKnot(studio);
+  </script>
+</body>
+</html>

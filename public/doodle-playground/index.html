@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>3D Doodle Studio - Neon Ribbons with Three.js</title>
+  <script type="module" crossorigin src="./assets/index-BkmcSgYj.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-DOkyrHwx.css">
+</head>
+<body>
+  <!-- 3D Canvas Viewport -->
+  <div id="canvas-container"></div>
+
+  <!-- Top Floating Header -->
+  <header class="top-hud">
+    <div class="brand-title">
+      <span>3D Doodle Studio</span>
+      <span class="brand-badge">Three.js</span>
+    </div>
+
+    <!-- Mode Selector: Draw vs Inspect -->
+    <div class="mode-toggle">
+      <button id="mode-draw" class="mode-btn active">Draw Mode</button>
+      <button id="mode-inspect" class="mode-btn">Inspect Mode</button>
+    </div>
+  </header>
+
+  <!-- Left Studio Toolbar -->
+  <aside class="studio-panel">
+    <!-- Palette -->
+    <div class="panel-section">
+      <span class="section-label">Neon Palette</span>
+      <div class="palette-row">
+        <div class="color-dot active" style="background-color: #00f0ff; --dot-color: #00f0ff;" data-color="#00f0ff" title="Cyber Cyan"></div>
+        <div class="color-dot" style="background-color: #ff0077; --dot-color: #ff0077;" data-color="#ff0077" title="Electric Magenta"></div>
+        <div class="color-dot" style="background-color: #39ff14; --dot-color: #39ff14;" data-color="#39ff14" title="Acid Lime"></div>
+        <div class="color-dot" style="background-color: #ffaa00; --dot-color: #ffaa00;" data-color="#ffaa00" title="Solar Amber"></div>
+        <div class="color-dot" style="background-color: #9d00ff; --dot-color: #9d00ff;" data-color="#9d00ff" title="Plasma Violet"></div>
+        <div class="color-dot rainbow-dot" data-rainbow="true" title="Prism Rainbow"></div>
+      </div>
+    </div>
+
+    <!-- Geometry Style -->
+    <div class="panel-section">
+      <span class="section-label">Ribbon Geometry</span>
+      <div class="style-grid">
+        <button class="style-btn active" data-style="strip">Flat Strip</button>
+        <button class="style-btn" data-style="twisted">Helix Twist</button>
+        <button class="style-btn" data-style="faceted">Crystal Prism</button>
+        <button class="style-btn" data-style="tube">Glow Tube</button>
+      </div>
+    </div>
+
+    <!-- Sliders -->
+    <div class="panel-section">
+      <span class="section-label">Brush Controls</span>
+      <div class="slider-item">
+        <div class="slider-label">
+          <span>Width</span>
+          <span id="width-val">0.8</span>
+        </div>
+        <input type="range" id="width-slider" min="0.2" max="2.5" step="0.1" value="0.8" />
+      </div>
+
+      <div class="slider-item">
+        <div class="slider-label">
+          <span>Glow Intensity</span>
+          <span id="glow-val">1.5</span>
+        </div>
+        <input type="range" id="glow-slider" min="0.5" max="3.5" step="0.1" value="1.5" />
+      </div>
+
+      <div class="slider-item">
+        <div class="slider-label">
+          <span>Depth Plane</span>
+          <span id="depth-val">0.0</span>
+        </div>
+        <input type="range" id="depth-slider" min="-8" max="8" step="0.5" value="0" />
+      </div>
+    </div>
+
+    <!-- Motion & Environment -->
+    <div class="panel-section">
+      <span class="section-label">Environment</span>
+      <label class="checkbox-row">
+        <span>Zero-G Wave Float</span>
+        <input type="checkbox" id="wave-toggle" checked />
+      </label>
+      <label class="checkbox-row">
+        <span>Turntable Auto-Rotate</span>
+        <input type="checkbox" id="rotate-toggle" />
+      </label>
+      <label class="checkbox-row">
+        <span>Spatial Grid</span>
+        <input type="checkbox" id="grid-toggle" checked />
+      </label>
+    </div>
+
+    <!-- Presets -->
+    <div class="panel-section">
+      <span class="section-label">3D Sculptures</span>
+      <div class="style-grid">
+        <button class="style-btn" id="preset-torus">Mobius Knot</button>
+        <button class="style-btn" id="preset-spire">Twin Spire</button>
+        <button class="style-btn" id="preset-spiral">Quantum Ring</button>
+      </div>
+    </div>
+
+    <!-- Actions -->
+    <div class="panel-section">
+      <div class="actions-grid">
+        <button class="action-btn" id="btn-undo">Undo</button>
+        <button class="action-btn danger" id="btn-clear">Clear</button>
+        <button class="action-btn" id="btn-reset-cam">Reset View</button>
+        <button class="action-btn" id="btn-snapshot">Snapshot</button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Bottom Navigation Hint -->
+  <div class="bottom-hint">
+    <span><kbd>Left Drag</kbd> Draw Ribbon</span>
+    <span>•</span>
+    <span><kbd>Right Drag / Touch</kbd> Orbit 360°</span>
+    <span>•</span>
+    <span><kbd>Scroll</kbd> Zoom</span>
+    <span>•</span>
+    <span><kbd>Space</kbd> Toggle Mode</span>
+  </div>
+
+</body>
+</html>
