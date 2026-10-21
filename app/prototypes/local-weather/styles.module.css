@@ -1,0 +1,1804 @@
+/* ==========================================================================
+   Local Weather Dashboard - Fully Functional Responsive Dark Stylesheet
+   Strict CSS Modules compliance per AGENTS.md:
+   - Scoped class names starting every selector
+   - Zero bare HTML element selectors
+   - Zero :root variables leaks
+   ========================================================================== */
+
+/* Overall Page Canvas */
+.pageBackground {
+  min-height: 100vh;
+  background-color: #0d0e12;
+  background-image: radial-gradient(circle at 50% 25%, #191b22 0%, #0d0e12 85%);
+  color: #f1f5f9;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem 1rem;
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Discreet Utility Navigation Bar */
+.utilityBar {
+  width: 100%;
+  max-width: 1040px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding: 0 0.5rem;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.utilityBackLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #64748b;
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: color 0.15s ease;
+}
+
+.utilityBackLink:hover {
+  color: #94a3b8;
+}
+
+.backArrow {
+  font-size: 0.95rem;
+}
+
+/* View Switcher Pill (Dashboard vs 3D World Globe) */
+.viewSwitcherPill {
+  display: flex;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 9999px;
+  padding: 2px;
+}
+
+.viewSwitcherOption {
+  background: transparent;
+  border: none;
+  color: #94a3b8;
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0.35rem 0.85rem;
+  border-radius: 9999px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  transition: all 0.15s ease;
+}
+
+.viewSwitcherOption:hover {
+  color: #f8fafc;
+}
+
+.viewSwitcherOptionActive {
+  background: #f59e0b;
+  color: #0f172a;
+}
+
+.viewSwitcherOptionActive:hover {
+  color: #0f172a;
+}
+
+.utilityControls {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+/* Unit Switcher Pill */
+.unitPill {
+  display: flex;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 9999px;
+  padding: 2px;
+}
+
+.unitOption {
+  background: transparent;
+  border: none;
+  color: #64748b;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.25rem 0.65rem;
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.unitOptionActive {
+  background: rgba(255, 255, 255, 0.15);
+  color: #f8fafc;
+}
+
+.refreshBtn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #94a3b8;
+  font-size: 0.75rem;
+  font-weight: 500;
+  padding: 0.35rem 0.75rem;
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.refreshBtn:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.1);
+  color: #f8fafc;
+}
+
+.refreshBtn:disabled {
+  opacity: 0.5;
+  cursor: wait;
+}
+
+/* ==========================================================================
+   Main Sleek Dark Tablet Frame (Matching Reference Image)
+   ========================================================================== */
+.tabletFrame {
+  width: 100%;
+  max-width: 1040px;
+  min-height: 600px;
+  background: linear-gradient(145deg, #1d1e22 0%, #151619 100%);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 32px;
+  box-shadow: 
+    0 35px 70px -15px rgba(0, 0, 0, 0.85),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.08);
+  padding: 2.25rem 2.75rem 2.5rem 2.75rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+  .tabletFrame {
+    padding: 1.5rem 1.25rem;
+    border-radius: 24px;
+    min-height: auto;
+  }
+}
+
+/* ==========================================================================
+   Top Header: Location Selector & Date Stamp
+   ========================================================================== */
+.topHeader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  z-index: 30;
+  margin-bottom: 1.5rem;
+}
+
+.locationSelectorWrap {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  position: relative;
+}
+
+.locationButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  background: transparent;
+  border: none;
+  color: #e2e8f0;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 0.35rem 0.6rem;
+  border-radius: 8px;
+  transition: background 0.15s ease;
+}
+
+.locationButton:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.locationPinIcon {
+  font-size: 0.85rem;
+  opacity: 0.8;
+}
+
+.locationText {
+  letter-spacing: -0.01em;
+}
+
+.chevronIcon {
+  font-size: 0.75rem;
+  color: #94a3b8;
+  margin-left: 0.1rem;
+}
+
+.dateStamp {
+  color: #71767f;
+  font-size: 0.825rem;
+  font-weight: 400;
+}
+
+/* Location Search Popover */
+.locationPopover {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 0.5rem;
+  width: 360px;
+  max-width: 90vw;
+  background: #1e2025;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
+  padding: 1.15rem;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.75);
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  animation: fadeInPop 0.15s ease-out;
+  z-index: 50;
+}
+
+.popoverHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #94a3b8;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.popoverCloseBtn {
+  background: transparent;
+  border: none;
+  color: #94a3b8;
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+
+.gpsDetectOption {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  width: 100%;
+  background: rgba(245, 158, 11, 0.1);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  color: #fbbf24;
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0.55rem 0.85rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.gpsDetectOption:hover:not(:disabled) {
+  background: rgba(245, 158, 11, 0.2);
+}
+
+.gpsIcon {
+  font-size: 0.95rem;
+}
+
+.gpsLabel {
+  letter-spacing: -0.01em;
+}
+
+.searchInputWrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.popoverInput {
+  width: 100%;
+  background: #141518;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+  color: #f1f5f9;
+  padding: 0.55rem 0.85rem;
+  font-size: 0.85rem;
+  outline: none;
+}
+
+.popoverInput:focus {
+  border-color: #f59e0b;
+}
+
+.inputSpinner {
+  position: absolute;
+  right: 10px;
+  color: #f59e0b;
+  font-size: 0.9rem;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Autocomplete Results List */
+.searchResultsList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-height: 180px;
+  overflow-y: auto;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  background: #151619;
+}
+
+.searchResultItem {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  color: #e2e8f0;
+  padding: 0.55rem 0.85rem;
+  text-align: left;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  font-size: 0.8rem;
+  transition: background 0.15s ease;
+}
+
+.searchResultItem:hover {
+  background: rgba(245, 158, 11, 0.15);
+  color: #fbbf24;
+}
+
+.resultCityName {
+  font-weight: 600;
+}
+
+.resultCountry {
+  font-size: 0.725rem;
+  color: #94a3b8;
+}
+
+.popularCitiesSection {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-top: 0.25rem;
+}
+
+.popularCitiesLabel {
+  font-size: 0.7rem;
+  color: #64748b;
+  text-transform: uppercase;
+}
+
+.popularCitiesRow {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+
+.popularCityChip {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #cbd5e1;
+  font-size: 0.725rem;
+  padding: 0.3rem 0.6rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.popularCityChip:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: #f8fafc;
+}
+
+/* Status Banner */
+.statusBanner {
+  background: rgba(245, 158, 11, 0.12);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  color: #fde68a;
+  font-size: 0.8rem;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.statusCloseBtn {
+  background: transparent;
+  border: none;
+  color: #fde68a;
+  cursor: pointer;
+}
+
+/* ==========================================================================
+   VIEW 1: Interactive Three.js 3D World Globe
+   ========================================================================== */
+.globeViewWrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  min-height: 480px;
+}
+
+.globeStageWrap {
+  width: 100%;
+  height: 420px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.globeCanvasContainer {
+  width: 100%;
+  height: 100%;
+  cursor: grab;
+  outline: none;
+}
+
+/* Tooltip on City Hover */
+.globeTooltip {
+  position: absolute;
+  pointer-events: none;
+  transform: translate(-50%, -100%);
+  background: rgba(18, 20, 24, 0.95);
+  border: 1px solid #f59e0b;
+  border-radius: 8px;
+  padding: 0.4rem 0.75rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6), 0 0 10px rgba(245, 158, 11, 0.3);
+  z-index: 60;
+  white-space: nowrap;
+  animation: fadeInPop 0.1s ease-out;
+}
+
+.globeTooltipCity {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.globeTooltipSub {
+  font-size: 0.7rem;
+  color: #fbbf24;
+}
+
+/* Controls Tip Bar */
+.globeInstructionsBar {
+  position: absolute;
+  top: 10px;
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  background: rgba(18, 20, 24, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 9999px;
+  padding: 0.35rem 1rem;
+  font-size: 0.75rem;
+  color: #94a3b8;
+  backdrop-filter: blur(8px);
+  pointer-events: none;
+}
+
+@media (max-width: 640px) {
+  .globeInstructionsBar {
+    display: none;
+  }
+}
+
+.globeInstructionItem {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.instructionIcon {
+  font-size: 0.85rem;
+}
+
+/* Bottom Floating Telemetry Badge in Globe View */
+.globeFloatingBadge {
+  width: 100%;
+  max-width: 680px;
+  margin-top: 1rem;
+  background: rgba(26, 28, 33, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 0.85rem 1.25rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+}
+
+@media (max-width: 640px) {
+  .globeFloatingBadge {
+    flex-direction: column;
+    gap: 0.75rem;
+    align-items: flex-start;
+  }
+}
+
+.badgeLeft {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.badgeCityName {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.95rem;
+  color: #f8fafc;
+}
+
+.badgeWeatherDetails {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.85rem;
+  color: #cbd5e1;
+}
+
+.badgeTemp {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.badgeCondition {
+  color: #f59e0b;
+  font-weight: 500;
+}
+
+.badgeWind {
+  color: #94a3b8;
+  font-size: 0.8rem;
+}
+
+.badgeInspectBtn {
+  background: #f59e0b;
+  border: none;
+  color: #0f172a;
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.badgeInspectBtn:hover {
+  background: #fbbf24;
+  transform: translateX(2px);
+}
+
+/* ==========================================================================
+   VIEW 2: Original Middle Stage (Hero, Cloud, 7-Day Forecast Card)
+   ========================================================================== */
+.heroStage {
+  display: grid;
+  grid-template-columns: 240px 1fr 230px;
+  align-items: center;
+  gap: 1.5rem;
+  margin: 1.5rem 0 2.5rem 0;
+  position: relative;
+  z-index: 10;
+}
+
+@media (max-width: 960px) {
+  .heroStage {
+    grid-template-columns: 1fr;
+    gap: 2.25rem;
+    text-align: center;
+  }
+}
+
+/* Left Hero Column */
+.heroLeftCol {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+@media (max-width: 960px) {
+  .heroLeftCol {
+    align-items: center;
+  }
+}
+
+.temperatureDisplay {
+  display: flex;
+  align-items: flex-start;
+  line-height: 0.85;
+}
+
+.tempNumber {
+  font-size: 5.75rem;
+  font-weight: 200;
+  letter-spacing: -0.06em;
+  color: #ffffff;
+}
+
+.tempDegree {
+  font-size: 2.25rem;
+  font-weight: 200;
+  color: #cbd5e1;
+  margin-top: 0.25rem;
+  margin-left: 0.15rem;
+}
+
+.conditionTitle {
+  font-size: 1.6rem;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  color: #e2e8f0;
+  margin: 1rem 0 2rem 0;
+}
+
+.telemetryRow {
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
+}
+
+.telemetryItem {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.telemetryHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.telemetryIconSvg {
+  width: 14px;
+  height: 14px;
+  color: #94a3b8;
+}
+
+.telemetryLabel {
+  font-size: 0.725rem;
+  color: #71767f;
+  font-weight: 500;
+}
+
+.telemetryValue {
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: #f1f5f9;
+  letter-spacing: -0.01em;
+}
+
+/* ==========================================================================
+   Center Volumetric Weather Artwork Visuals
+   ========================================================================== */
+.cloudVisualContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  min-height: 220px;
+}
+
+/* 1. Volumetric Storm Cloud with Amber Glow & Lightning */
+.volumetricCloud {
+  position: relative;
+  width: 280px;
+  height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: cloudFloat 6s ease-in-out infinite;
+}
+
+@keyframes cloudFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+.cloudAmberGlow {
+  position: absolute;
+  top: 35%;
+  right: 22%;
+  width: 110px;
+  height: 70px;
+  background: radial-gradient(circle, rgba(251, 191, 36, 0.95) 0%, rgba(245, 158, 11, 0.6) 45%, rgba(217, 119, 6, 0) 75%);
+  filter: blur(14px);
+  border-radius: 9999px;
+  z-index: 2;
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
+
+.cloudPuffBack {
+  position: absolute;
+  top: 15px;
+  left: 20px;
+  width: 240px;
+  height: 110px;
+  background: radial-gradient(ellipse at 45% 45%, rgba(255, 255, 255, 0.88) 0%, rgba(226, 232, 240, 0.7) 45%, rgba(148, 163, 184, 0.1) 75%, transparent 100%);
+  filter: blur(10px);
+  border-radius: 9999px;
+  z-index: 1;
+}
+
+.cloudPuffMid {
+  position: absolute;
+  top: 25px;
+  right: 25px;
+  width: 170px;
+  height: 95px;
+  background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.95) 0%, rgba(241, 245, 249, 0.8) 50%, rgba(203, 213, 225, 0.15) 80%, transparent 100%);
+  filter: blur(8px);
+  border-radius: 9999px;
+  z-index: 3;
+}
+
+.cloudPuffFront {
+  position: absolute;
+  top: 38px;
+  left: 45px;
+  width: 190px;
+  height: 85px;
+  background: radial-gradient(circle at 40% 40%, rgba(255, 255, 255, 0.98) 0%, rgba(226, 232, 240, 0.85) 55%, transparent 85%);
+  filter: blur(6px);
+  border-radius: 9999px;
+  z-index: 4;
+}
+
+/* 3D Glowing Lightning Bolt */
+.lightningBolt {
+  position: absolute;
+  bottom: -32px;
+  left: 36%;
+  width: 100px;
+  height: 150px;
+  z-index: 5;
+  filter: drop-shadow(0 0 16px rgba(245, 158, 11, 0.85));
+  animation: boltPulse 3.5s ease-in-out infinite;
+}
+
+.lightningSvg {
+  width: 100%;
+  height: 100%;
+}
+
+@keyframes boltPulse {
+  0%, 100% {
+    opacity: 0.95;
+    transform: scale(1) translateY(0);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.03) translateY(-2px);
+    filter: drop-shadow(0 0 24px rgba(251, 191, 36, 0.95));
+  }
+}
+
+/* 2. Radiant Sun Artwork */
+.sunArtworkContainer {
+  position: relative;
+  width: 220px;
+  height: 220px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: sunFloat 7s ease-in-out infinite;
+}
+
+@keyframes sunFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+.sunAuraGlow {
+  position: absolute;
+  width: 190px;
+  height: 190px;
+  border-radius: 9999px;
+  background: radial-gradient(circle, rgba(245, 158, 11, 0.7) 0%, rgba(217, 119, 6, 0.25) 50%, transparent 75%);
+  filter: blur(18px);
+}
+
+.sunCoreCircle {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  border-radius: 9999px;
+  background: radial-gradient(circle at 35% 35%, #FFF2A3 0%, #F59E0B 50%, #D97706 100%);
+  box-shadow: 0 0 35px rgba(245, 158, 11, 0.9);
+  z-index: 2;
+}
+
+.sunRayRing {
+  position: absolute;
+  width: 160px;
+  height: 160px;
+  animation: rotateRays 28s linear infinite;
+}
+
+@keyframes rotateRays {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.sunRayBeam1 {
+  position: absolute;
+  top: 0; left: 50%;
+  width: 3px; height: 160px;
+  margin-left: -1.5px;
+  background: linear-gradient(to bottom, rgba(251, 191, 36, 0.6) 0%, transparent 40%, transparent 60%, rgba(251, 191, 36, 0.6) 100%);
+}
+
+.sunRayBeam2 {
+  position: absolute;
+  top: 0; left: 50%;
+  width: 3px; height: 160px;
+  margin-left: -1.5px;
+  transform: rotate(45deg);
+  background: linear-gradient(to bottom, rgba(251, 191, 36, 0.6) 0%, transparent 40%, transparent 60%, rgba(251, 191, 36, 0.6) 100%);
+}
+
+.sunRayBeam3 {
+  position: absolute;
+  top: 0; left: 50%;
+  width: 3px; height: 160px;
+  margin-left: -1.5px;
+  transform: rotate(90deg);
+  background: linear-gradient(to bottom, rgba(251, 191, 36, 0.6) 0%, transparent 40%, transparent 60%, rgba(251, 191, 36, 0.6) 100%);
+}
+
+.sunRayBeam4 {
+  position: absolute;
+  top: 0; left: 50%;
+  width: 3px; height: 160px;
+  margin-left: -1.5px;
+  transform: rotate(135deg);
+  background: linear-gradient(to bottom, rgba(251, 191, 36, 0.6) 0%, transparent 40%, transparent 60%, rgba(251, 191, 36, 0.6) 100%);
+}
+
+/* 3. Rain Artwork */
+.rainCloudPuffBack {
+  position: absolute;
+  top: 15px;
+  left: 20px;
+  width: 240px;
+  height: 110px;
+  background: radial-gradient(ellipse at 45% 45%, rgba(148, 163, 184, 0.8) 0%, rgba(71, 85, 105, 0.65) 55%, transparent 90%);
+  filter: blur(10px);
+  border-radius: 9999px;
+  z-index: 1;
+}
+
+.rainDropsWrap {
+  position: absolute;
+  bottom: -25px;
+  left: 45px;
+  width: 180px;
+  height: 50px;
+  display: flex;
+  justify-content: space-around;
+  z-index: 5;
+}
+
+.rainDrop1, .rainDrop2, .rainDrop3, .rainDrop4, .rainDrop5 {
+  width: 2.5px;
+  height: 16px;
+  background: linear-gradient(to bottom, transparent 0%, #38bdf8 100%);
+  border-radius: 2px;
+  transform: rotate(15deg);
+  animation: rainFall 0.9s linear infinite;
+}
+
+.rainDrop2 { animation-delay: 0.2s; }
+.rainDrop3 { animation-delay: 0.5s; }
+.rainDrop4 { animation-delay: 0.1s; }
+.rainDrop5 { animation-delay: 0.4s; }
+
+@keyframes rainFall {
+  0% { transform: translateY(-10px) rotate(15deg); opacity: 0; }
+  40% { opacity: 1; }
+  100% { transform: translateY(24px) rotate(15deg); opacity: 0; }
+}
+
+/* 4. Snow Artwork */
+.snowCloudGlow {
+  position: absolute;
+  top: 30%;
+  left: 30%;
+  width: 120px;
+  height: 80px;
+  background: radial-gradient(circle, rgba(186, 230, 253, 0.5) 0%, transparent 70%);
+  filter: blur(14px);
+}
+
+.snowflakesWrap {
+  position: absolute;
+  bottom: -20px;
+  left: 40px;
+  width: 180px;
+  display: flex;
+  justify-content: space-around;
+  font-size: 1.15rem;
+  color: #bae6fd;
+}
+
+.snowflake1, .snowflake2, .snowflake3 {
+  animation: snowDrift 2.2s ease-in-out infinite;
+}
+
+.snowflake2 { animation-delay: 0.7s; }
+.snowflake3 { animation-delay: 1.3s; }
+
+@keyframes snowDrift {
+  0% { transform: translateY(-5px); opacity: 0.2; }
+  50% { transform: translateY(12px) translateX(4px); opacity: 1; }
+  100% { transform: translateY(25px); opacity: 0; }
+}
+
+/* ==========================================================================
+   Right Column: Floating Rounded 7-Day Forecast Card
+   ========================================================================== */
+.forecastCard {
+  background: rgba(26, 28, 33, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  padding: 1.15rem 1.25rem;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+}
+
+.forecastList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.forecastItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  padding: 0.2rem 0;
+  transition: opacity 0.15s ease;
+}
+
+.forecastItem:hover {
+  opacity: 0.9;
+}
+
+.forecastItemLeft {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  position: relative;
+}
+
+/* Vertical Amber Active Bar */
+.activeLine {
+  width: 3px;
+  height: 24px;
+  border-radius: 2px;
+  background: #f59e0b;
+  opacity: 0;
+  margin-right: -0.25rem;
+  transition: opacity 0.15s ease;
+}
+
+.activeLineVisible {
+  opacity: 1;
+}
+
+.forecastIcon {
+  display: flex;
+  align-items: center;
+  color: #94a3b8;
+}
+
+.forecastItemActive .forecastIcon {
+  color: #f59e0b;
+}
+
+.weatherSvgIcon {
+  width: 17px;
+  height: 17px;
+}
+
+.forecastTextCol {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.25;
+}
+
+.forecastDayName {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #f1f5f9;
+}
+
+.forecastConditionText {
+  font-size: 0.675rem;
+  color: #71767f;
+}
+
+.forecastTempText {
+  font-size: 0.85rem;
+  font-weight: 400;
+  color: #cbd5e1;
+}
+
+/* ==========================================================================
+   Bottom Section: Hourly Spline Wave & Timeline
+   ========================================================================== */
+.timelineSection {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  position: relative;
+  z-index: 20;
+}
+
+.splineGraphWrap {
+  position: relative;
+  width: 100%;
+  height: 80px;
+}
+
+.splineSvg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.activeDotPulse {
+  filter: drop-shadow(0 0 6px rgba(245, 158, 11, 0.9));
+}
+
+/* Floating Temperature Labels */
+.tempPointsRow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 10px;
+  box-sizing: border-box;
+}
+
+.tempPointWrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  pointer-events: auto;
+  position: relative;
+}
+
+.activeTopDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 9999px;
+  background: #f59e0b;
+  box-shadow: 0 0 8px #f59e0b;
+  margin-bottom: 2px;
+}
+
+.hourlyTempLabel {
+  font-size: 0.875rem;
+  font-weight: 400;
+  color: #cbd5e1;
+  letter-spacing: -0.01em;
+}
+
+.tempPointActive .hourlyTempLabel {
+  color: #ffffff;
+  font-weight: 600;
+}
+
+/* Time Track Row & Pager */
+.timeTrackRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  padding-top: 0.75rem;
+}
+
+.timeChipsList {
+  display: flex;
+  justify-content: space-between;
+  flex: 1;
+  padding-right: 2rem;
+}
+
+.timeChip {
+  background: transparent;
+  border: 1px solid transparent;
+  color: #71767f;
+  font-size: 0.75rem;
+  font-weight: 400;
+  padding: 0.25rem 0.55rem;
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.timeChip:hover {
+  color: #cbd5e1;
+}
+
+.timeChipActive {
+  color: #f1f5f9;
+  border-color: rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.timelinePager {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.pagerBtn {
+  width: 26px;
+  height: 26px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 6px;
+  color: #94a3b8;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.pagerBtn:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.1);
+  color: #f8fafc;
+}
+
+.pagerBtn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+@keyframes fadeInPop {
+  from {
+    opacity: 0;
+    transform: scale(0.96) translateY(-4px) translateX(-50%);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0) translateX(-50%);
+  }
+}
+
+/* ==========================================================================
+   Ambient Dynamic Weather Backdrop Canvas
+   ========================================================================== */
+.ambientCanvasBackdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.95;
+}
+
+/* ==========================================================================
+   Interactive Map Layer Controls & Globe Enhancements
+   ========================================================================== */
+.globeLayerSwitcher {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.25rem;
+  display: flex;
+  background: rgba(18, 20, 26, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 9999px;
+  padding: 3px;
+  gap: 3px;
+  z-index: 20;
+}
+
+.globeLayerBtn {
+  background: transparent;
+  border: none;
+  color: #94a3b8;
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 0.3rem 0.65rem;
+  border-radius: 9999px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  transition: all 0.15s ease;
+}
+
+.globeLayerBtn:hover {
+  color: #f1f5f9;
+}
+
+.globeLayerBtnActive {
+  background: rgba(245, 158, 11, 0.2);
+  color: #fbbf24;
+  border: 1px solid rgba(245, 158, 11, 0.4);
+}
+
+.globeTooltipBadge {
+  background: rgba(245, 158, 11, 0.2);
+  color: #fbbf24;
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 1px 4px;
+  border-radius: 4px;
+  margin-left: 0.35rem;
+}
+
+/* ==========================================================================
+   City Favorites Shelf & Pin Controls
+   ========================================================================== */
+.favoriteStarBtn {
+  background: transparent;
+  border: none;
+  color: #64748b;
+  font-size: 1.1rem;
+  cursor: pointer;
+  padding: 0.2rem 0.4rem;
+  margin-left: 0.4rem;
+  border-radius: 6px;
+  transition: all 0.15s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.favoriteStarBtn:hover {
+  color: #fcd34d;
+  transform: scale(1.15);
+}
+
+.favoriteStarBtnActive {
+  color: #f59e0b;
+  text-shadow: 0 0 8px rgba(245, 158, 11, 0.6);
+}
+
+.favoriteShelf {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0 0.75rem 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  margin-bottom: 0.75rem;
+}
+
+.favoriteShelf::-webkit-scrollbar {
+  display: none;
+}
+
+.favoriteShelfLabel {
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #64748b;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.favoriteChip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 9999px;
+  padding: 0.25rem 0.65rem;
+  font-size: 0.75rem;
+  color: #cbd5e1;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+
+.favoriteChip:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.18);
+  color: #f8fafc;
+}
+
+.favoriteChipActive {
+  background: rgba(245, 158, 11, 0.15);
+  border-color: rgba(245, 158, 11, 0.45);
+  color: #fef08a;
+  box-shadow: 0 0 10px rgba(245, 158, 11, 0.15);
+}
+
+.favoriteChipCity {
+  font-weight: 600;
+}
+
+.favoriteChipCountry {
+  font-size: 0.65rem;
+  color: #94a3b8;
+}
+
+.favoriteRemoveBtn {
+  background: transparent;
+  border: none;
+  color: #64748b;
+  font-size: 0.7rem;
+  cursor: pointer;
+  padding: 0 2px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.15s ease;
+}
+
+.favoriteRemoveBtn:hover {
+  color: #ef4444;
+}
+
+/* ==========================================================================
+   Utility Controls: Time Format, Ambient FX Toggle
+   ========================================================================== */
+.timeFormatPill {
+  display: flex;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 9999px;
+  padding: 2px;
+}
+
+.timeFormatOption {
+  background: transparent;
+  border: none;
+  color: #64748b;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.25rem 0.55rem;
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.timeFormatOptionActive {
+  background: rgba(255, 255, 255, 0.15);
+  color: #f8fafc;
+}
+
+.ambientToggleBtn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #94a3b8;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.28rem 0.65rem;
+  border-radius: 9999px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  transition: all 0.15s ease;
+}
+
+.ambientToggleBtn:hover {
+  color: #f1f5f9;
+  background: rgba(255, 255, 255, 0.09);
+}
+
+.ambientToggleBtnActive {
+  background: rgba(56, 189, 248, 0.15);
+  color: #38bdf8;
+  border-color: rgba(56, 189, 248, 0.35);
+}
+
+/* ==========================================================================
+   Forecast Metric Switcher (Temperature vs Precipitation %)
+   ========================================================================== */
+.metricSwitcherPill {
+  display: flex;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 9999px;
+  padding: 2px;
+  margin-left: 0.5rem;
+}
+
+.metricOption {
+  background: transparent;
+  border: none;
+  color: #71767f;
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 0.2rem 0.65rem;
+  border-radius: 9999px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  transition: all 0.15s ease;
+}
+
+.metricOption:hover {
+  color: #cbd5e1;
+}
+
+.metricOptionActive {
+  background: rgba(245, 158, 11, 0.2);
+  color: #fbbf24;
+  border: 1px solid rgba(245, 158, 11, 0.4);
+}
+
+.metricOptionActiveCyan {
+  background: rgba(56, 189, 248, 0.2);
+  color: #38bdf8;
+  border: 1px solid rgba(56, 189, 248, 0.4);
+}
+
+/* Enhanced 7-Day Forecast Items */
+.forecastMinMaxWrap {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.15rem;
+}
+
+.forecastMinMaxRow {
+  display: flex;
+  align-items: baseline;
+  gap: 0.35rem;
+}
+
+.forecastMaxTemp {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #f8fafc;
+}
+
+.forecastMinTemp {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #94a3b8;
+}
+
+.forecastPrecipTag {
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: #38bdf8;
+  background: rgba(56, 189, 248, 0.12);
+  padding: 1px 5px;
+  border-radius: 4px;
+}
+
+/* ==========================================================================
+   Smart Meteorological Insights Grid
+   ========================================================================== */
+.insightsSection {
+  width: 100%;
+  margin-top: 1.5rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.insightsSectionHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.85rem;
+}
+
+.insightsTitle {
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #94a3b8;
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.insightsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 0.85rem;
+  width: 100%;
+}
+
+.insightCard {
+  background: rgba(18, 20, 26, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 0.95rem;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  transition: transform 0.18s ease, border-color 0.18s ease;
+}
+
+.insightCard:hover {
+  border-color: rgba(255, 255, 255, 0.16);
+  transform: translateY(-2px);
+}
+
+.insightCardTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.insightCardHeading {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #94a3b8;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+/* Weather Alerts Badge */
+.alertBadgeSevere {
+  background: rgba(239, 68, 68, 0.15);
+  border: 1px solid rgba(239, 68, 68, 0.4);
+  color: #f87171;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 9999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.alertBadgeWarning {
+  background: rgba(245, 158, 11, 0.15);
+  border: 1px solid rgba(245, 158, 11, 0.4);
+  color: #fbbf24;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 9999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.alertBadgeNormal {
+  background: rgba(16, 185, 129, 0.15);
+  border: 1px solid rgba(16, 185, 129, 0.4);
+  color: #34d399;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 9999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.alertSummaryText {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #f1f5f9;
+  line-height: 1.35;
+}
+
+.alertDescriptionText {
+  font-size: 0.76rem;
+  color: #94a3b8;
+  line-height: 1.4;
+}
+
+/* Clothing Advice */
+.clothingTagsWrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.25rem;
+}
+
+.clothingTag {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  color: #e2e8f0;
+  font-size: 0.73rem;
+  font-weight: 500;
+  padding: 0.25rem 0.55rem;
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.clothingSummaryText {
+  font-size: 0.82rem;
+  color: #cbd5e1;
+  line-height: 1.4;
+}
+
+/* Outdoor Activity Index */
+.activityList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.activityRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.25rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.activityRow:last-child {
+  border-bottom: none;
+}
+
+.activityLabelCol {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.activityIconSpan {
+  font-size: 0.95rem;
+}
+
+.activityNameSpan {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #e2e8f0;
+}
+
+.activityRatingBadge {
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 9999px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.ratingGreat {
+  background: rgba(16, 185, 129, 0.18);
+  color: #34d399;
+  border: 1px solid rgba(16, 185, 129, 0.35);
+}
+
+.ratingGood {
+  background: rgba(56, 189, 248, 0.18);
+  color: #38bdf8;
+  border: 1px solid rgba(56, 189, 248, 0.35);
+}
+
+.ratingFair {
+  background: rgba(245, 158, 11, 0.18);
+  color: #fbbf24;
+  border: 1px solid rgba(245, 158, 11, 0.35);
+}
+
+.ratingPoor {
+  background: rgba(239, 68, 68, 0.18);
+  color: #f87171;
+  border: 1px solid rgba(239, 68, 68, 0.35);
+}
+
+/* Solar Widget (Sunrise & Sunset Arc) */
+.solarWidgetBody {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.solarArcContainer {
+  width: 100%;
+  max-width: 200px;
+  height: 60px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.solarArcSvg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.solarTimeFooter {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.75rem;
+}
+
+.solarTimePill {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.solarLabelSmall {
+  font-size: 0.65rem;
+  color: #94a3b8;
+  font-weight: 500;
+}
+
+.solarValBold {
+  font-weight: 700;
+  color: #f8fafc;
+}
+
+.daylightBadge {
+  font-size: 0.68rem;
+  color: #fbbf24;
+  background: rgba(245, 158, 11, 0.12);
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-weight: 600;
+}
+

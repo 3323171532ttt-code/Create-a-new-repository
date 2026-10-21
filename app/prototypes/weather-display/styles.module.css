@@ -1,520 +1,985 @@
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Inter:wght@400;500;600&display=swap');
 
-.container {
+/* Main Container: Warm Tactile Paper Parchment */
+.editorialContainer {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background-color: #0c1017;
-  color: #f1f5f9;
-  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-  padding: 1.5rem;
+  background-color: #FAF7F0;
+  color: #2B2826;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  padding: 2rem 2.5rem;
   box-sizing: border-box;
-  transition: background-color 0.4s ease;
+  background-image: radial-gradient(#E8E2D5 0.75px, transparent 0.75px);
+  background-size: 24px 24px;
 }
 
-/* Header & Top Bar */
-.headerBar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  border-bottom: 1.5px solid #1f2937;
-  padding-bottom: 1.25rem;
-  margin-bottom: 1.75rem;
-  flex-wrap: wrap;
-  gap: 1rem;
+@media (max-width: 768px) {
+  .editorialContainer {
+    padding: 1.25rem 1rem;
+  }
 }
 
-.headerLeft {
+/* Masthead Header */
+.masthead {
+  border-bottom: 2px solid #2B2826;
+  padding-bottom: 1.5rem;
+  margin-bottom: 2rem;
   display: flex;
-  align-items: center;
+  flex-direction: column;
   gap: 1.25rem;
 }
 
-.backButton {
-  display: inline-flex;
+.mastheadTopRow {
+  display: flex;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
-  padding: 0.5rem 0.9rem;
-  background-color: #1a2230;
-  border: 1.5px solid #334155;
-  color: #f1f5f9;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  border-bottom: 1px solid #D8CDBA;
+  padding-bottom: 0.5rem;
+}
+
+.returnLink {
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.85rem;
+  color: #8B2622;
   text-decoration: none;
-  font-size: 0.9rem;
-  font-weight: 600;
-  border-radius: 6px;
-  transition: all 0.15s ease;
-  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  transition: opacity 0.15s ease;
 }
 
-.backButton:hover {
-  background-color: #243044;
-  border-color: #60a5fa;
-  color: #60a5fa;
-  transform: translateX(-2px);
+.returnLink:hover {
+  text-decoration: underline;
+  opacity: 0.8;
 }
 
-.titleArea {
+.mastheadMeta {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.75rem;
+  color: #7A736E;
+  letter-spacing: 0.05em;
+}
+
+.metaEntry {
+  text-transform: uppercase;
+}
+
+.metaDivider {
+  color: #D8CDBA;
+}
+
+.mastheadMain {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1.5rem;
+}
+
+.mastheadTitleGroup {
   display: flex;
   flex-direction: column;
+  gap: 0.35rem;
 }
 
-.prototypeTitle {
-  font-size: 1.4rem;
-  font-weight: 800;
+.broadsideTitle {
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: 2.75rem;
+  font-weight: 700;
+  line-height: 1.05;
   letter-spacing: -0.02em;
   margin: 0;
-  color: #ffffff;
+  color: #2B2826;
 }
 
-.prototypeSubtitle {
+@media (max-width: 640px) {
+  .broadsideTitle {
+    font-size: 2rem;
+  }
+}
+
+.broadsideSubtitle {
+  font-family: 'Courier Prime', monospace;
   font-size: 0.85rem;
-  color: #94a3b8;
+  color: #7A736E;
   margin: 0;
-  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 0.02em;
 }
 
-.headerActions {
+/* Cinnabar Seal Stamp: Shuotong / Atmosphere Emblem */
+.cinnabarStamp {
+  flex-shrink: 0;
+  width: 62px;
+  height: 62px;
+  border: 2px solid #8B2622;
+  background-color: #FAF7F0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 2px 2px 0px #8B2622;
+  transform: rotate(2deg);
+  transition: transform 0.2s ease;
+  user-select: none;
+}
+
+.cinnabarStamp:hover {
+  transform: rotate(0deg) scale(1.04);
+}
+
+.stampInner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+.stampTopGlyph {
+  font-family: 'EB Garamond', serif;
+  font-size: 1.7rem;
+  font-weight: 700;
+  color: #8B2622;
+}
+
+.stampSubText {
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.45rem;
+  letter-spacing: 0.15em;
+  font-weight: 700;
+  color: #8B2622;
+}
+
+/* Action Belt */
+.actionBelt {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.beltLeft {
   display: flex;
   align-items: center;
   gap: 0.75rem;
   flex-wrap: wrap;
 }
 
-.statusTag {
-  background-color: rgba(59, 130, 246, 0.15);
-  border: 1px solid #3b82f6;
-  color: #93c5fd;
-  font-size: 0.75rem;
-  font-family: 'JetBrains Mono', monospace;
-  padding: 0.35rem 0.65rem;
-  border-radius: 6px;
-  font-weight: 600;
+.beltRight {
   display: flex;
   align-items: center;
-  gap: 0.4rem;
+  gap: 0.75rem;
 }
 
-.statusIndicatorLive {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background-color: #10b981;
-  box-shadow: 0 0 6px #10b981;
-}
-
-.statusIndicatorDemo {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background-color: #f59e0b;
-  box-shadow: 0 0 6px #f59e0b;
-}
-
-.unitToggleButton {
-  background-color: #1a2230;
-  border: 1.5px solid #334155;
-  color: #f1f5f9;
-  padding: 0.4rem 0.75rem;
-  border-radius: 6px;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.82rem;
+.stampButtonPrimary {
+  background-color: #8B2622;
+  color: #FAF7F0;
+  border: 1px solid #8B2622;
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.85rem;
   font-weight: 700;
+  padding: 0.55rem 0.95rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
   cursor: pointer;
+  transition: all 0.15s ease;
+  box-shadow: 2px 2px 0px #2B2826;
+}
+
+.stampButtonPrimary:hover:not(:disabled) {
+  background-color: #5F1D1B;
+  transform: translate(-1px, -1px);
+  box-shadow: 3px 3px 0px #2B2826;
+}
+
+.stampButtonPrimary:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.unitStampToggle {
+  background-color: #FFFDF9;
+  border: 1px solid #2B2826;
+  color: #2B2826;
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.85rem;
+  padding: 0.55rem 0.85rem;
+  cursor: pointer;
+  box-shadow: 2px 2px 0px #D8CDBA;
   transition: all 0.15s ease;
 }
 
-.unitToggleButton:hover {
-  border-color: #60a5fa;
-  color: #60a5fa;
+.unitStampToggle:hover {
+  background-color: #FAF7F0;
+  border-color: #8B2622;
+  color: #8B2622;
 }
 
-.apiKeyBtn {
-  background-color: #1f293d;
-  border: 1.5px solid #374151;
-  color: #e5e7eb;
-  padding: 0.4rem 0.75rem;
-  border-radius: 6px;
-  font-family: 'JetBrains Mono', monospace;
+.apiKeyStampBtn {
+  background-color: #FFFDF9;
+  border: 1px dashed #7A736E;
+  color: #2B2826;
+  font-family: 'Courier Prime', monospace;
   font-size: 0.8rem;
-  font-weight: 600;
+  padding: 0.55rem 0.85rem;
   cursor: pointer;
   transition: all 0.15s ease;
 }
 
-.apiKeyBtn:hover {
-  background-color: #2b3852;
-  border-color: #93c5fd;
-  color: #ffffff;
+.apiKeyStampBtn:hover {
+  border-color: #8B2622;
+  color: #8B2622;
+  background-color: #FAF7F0;
 }
 
-/* Main Workspace Grid */
-.mainLayout {
+/* Dispatch Banners */
+.dispatchNoticeBanner {
+  background-color: #EAF0EB;
+  border: 1px solid #264633;
+  color: #264633;
+  padding: 0.65rem 1rem;
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.82rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+
+.noticeText {
+  line-height: 1.4;
+}
+
+.noticeCloseBtn {
+  background: none;
+  border: none;
+  color: inherit;
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.78rem;
+  cursor: pointer;
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+.dispatchErrorBanner {
+  background-color: #F8EAE8;
+  border: 1px solid #8B2622;
+  color: #8B2622;
+  padding: 0.65rem 1rem;
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.82rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+
+.errorText {
+  line-height: 1.4;
+}
+
+/* Broadside Grid Layout */
+.broadsideLayout {
   display: grid;
-  grid-template-columns: 1fr 380px;
-  gap: 1.75rem;
-  flex: 1;
+  grid-template-columns: 1fr 360px;
+  gap: 2rem;
   align-items: start;
 }
 
-@media (max-width: 980px) {
-  .mainLayout {
+@media (max-width: 1040px) {
+  .broadsideLayout {
     grid-template-columns: 1fr;
   }
 }
 
-/* Atmospheric Weather Card */
-.weatherHeroCard {
-  border-radius: 14px;
+.leadColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* Specimen Paper Sheet */
+.specimenSheet {
+  background-color: #FFFDF9;
+  border: 1px solid #D8CDBA;
+  box-shadow: 4px 4px 0px rgba(43, 40, 38, 0.08);
   padding: 2.25rem;
-  position: relative;
-  overflow: hidden;
-  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.45);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  transition: all 0.4s ease;
-  min-height: 440px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-}
-
-/* Dynamic Atmospheric Themes */
-.themeClear {
-  background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 50%, #60a5fa 100%);
-  color: #ffffff;
-}
-
-.themeClouds {
-  background: linear-gradient(135deg, #1f2937 0%, #374151 50%, #4b5563 100%);
-  color: #ffffff;
-}
-
-.themeRain {
-  background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
-  color: #e2e8f0;
-}
-
-.themeThunderstorm {
-  background: linear-gradient(135deg, #180d2b 0%, #311b58 50%, #4c1d95 100%);
-  color: #ffffff;
-}
-
-.themeSnow {
-  background: linear-gradient(135deg, #1e293b 0%, #334155 50%, #64748b 100%);
-  color: #ffffff;
-}
-
-.themeMist {
-  background: linear-gradient(135deg, #131a24 0%, #202b3a 50%, #33445c 100%);
-  color: #e2e8f0;
-}
-
-/* Weather Card Components */
-.heroTopRow {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
+  gap: 2rem;
   position: relative;
-  z-index: 2;
-}
-
-.locationInfo {
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-}
-
-.locationCity {
-  font-size: 2.1rem;
-  font-weight: 800;
-  letter-spacing: -0.03em;
-  margin: 0;
-  line-height: 1.15;
-}
-
-.locationCoords {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.8rem;
-  opacity: 0.8;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.weatherIconGraphic {
-  font-size: 4.8rem;
-  line-height: 1;
-  filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.25));
-}
-
-.heroMiddleRow {
-  display: flex;
-  align-items: baseline;
-  gap: 1.5rem;
-  margin: 1.5rem 0;
-  position: relative;
-  z-index: 2;
-}
-
-.temperatureLarge {
-  font-size: 5.5rem;
-  font-weight: 900;
-  letter-spacing: -0.05em;
-  line-height: 1;
-  font-feature-settings: "tnum";
-}
-
-.temperatureDegree {
-  font-size: 2.5rem;
-  font-weight: 600;
-  opacity: 0.8;
-  vertical-align: top;
-}
-
-.weatherConditionInfo {
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-}
-
-.conditionMain {
-  font-size: 1.6rem;
-  font-weight: 700;
-  text-transform: capitalize;
-  margin: 0;
-}
-
-.conditionFeelsLike {
-  font-size: 0.95rem;
-  opacity: 0.85;
-  font-family: 'JetBrains Mono', monospace;
-}
-
-.tempRangeRow {
-  display: flex;
-  gap: 1rem;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.85rem;
-  opacity: 0.9;
-  margin-top: 0.25rem;
-}
-
-/* Hero Bottom Metrics Grid */
-.heroMetricsGrid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 0.75rem;
-  background-color: rgba(0, 0, 0, 0.25);
-  backdrop-filter: blur(8px);
-  border-radius: 10px;
-  padding: 1rem 1.25rem;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  position: relative;
-  z-index: 2;
 }
 
 @media (max-width: 640px) {
-  .heroMetricsGrid {
-    grid-template-columns: repeat(2, 1fr);
+  .specimenSheet {
+    padding: 1.25rem;
   }
 }
 
-.metricItem {
+.specimenHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  border-bottom: 1px solid #D8CDBA;
+  padding-bottom: 1rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.stationBlock {
   display: flex;
   flex-direction: column;
   gap: 0.2rem;
 }
 
-.metricLabel {
+.stationLabel {
+  font-family: 'Courier Prime', monospace;
   font-size: 0.72rem;
-  text-transform: uppercase;
-  font-weight: 600;
-  letter-spacing: 0.05em;
-  opacity: 0.75;
-  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 0.1em;
+  color: #7A736E;
 }
 
-.metricValue {
-  font-size: 1.05rem;
+.stationName {
+  font-family: 'EB Garamond', serif;
+  font-size: 2.4rem;
   font-weight: 700;
-  font-family: 'JetBrains Mono', monospace;
+  line-height: 1.1;
+  color: #2B2826;
+  margin: 0;
 }
 
-/* Side Controls & Options */
-.sideControls {
+.coordinatesBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.25rem;
+  font-family: 'Courier Prime', monospace;
+}
+
+@media (max-width: 640px) {
+  .coordinatesBlock {
+    align-items: flex-start;
+  }
+}
+
+.coordLabel {
+  font-size: 0.7rem;
+  color: #7A736E;
+  letter-spacing: 0.08em;
+}
+
+.coordValue {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #2B2826;
+}
+
+.sourceTagMini {
+  font-size: 0.68rem;
+  color: #8B2622;
+  letter-spacing: 0.05em;
+  border: 1px solid #8B2622;
+  padding: 0.1rem 0.35rem;
+  margin-top: 0.15rem;
+}
+
+/* Temperature Display */
+.temperatureDisplaySection {
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
+  flex-wrap: wrap;
+}
+
+.tempNumeral {
+  font-family: 'EB Garamond', serif;
+  font-size: 6rem;
+  font-weight: 700;
+  line-height: 0.95;
+  color: #2B2826;
+  letter-spacing: -0.04em;
+}
+
+@media (max-width: 640px) {
+  .tempNumeral {
+    font-size: 4.5rem;
+  }
+}
+
+.conditionLedger {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.conditionIconSymbol {
+  font-size: 2.8rem;
+  line-height: 1;
+}
+
+.conditionNameTitle {
+  font-family: 'EB Garamond', serif;
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: #2B2826;
+  text-transform: capitalize;
+}
+
+.conditionSubscript {
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.82rem;
+  color: #7A736E;
+}
+
+.diurnalRangeRow {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.8rem;
+  color: #2B2826;
+  margin-top: 0.3rem;
+}
+
+.rangeSep {
+  color: #D8CDBA;
+}
+
+/* Ambient Poetic Weather Dispatch */
+.ambientPoeticCard {
+  background-color: #FAF7F0;
+  border-left: 3px solid #8B2622;
+  border-top: 1px solid #D8CDBA;
+  border-right: 1px solid #D8CDBA;
+  border-bottom: 1px solid #D8CDBA;
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.poeticHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.poeticLabel {
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  font-weight: 700;
+  color: #8B2622;
+}
+
+.poeticSealChar {
+  font-family: 'EB Garamond', serif;
+  font-size: 0.85rem;
+  color: #8B2622;
+}
+
+.poeticText {
+  font-family: 'EB Garamond', Georgia, serif;
+  font-style: italic;
+  font-size: 1.25rem;
+  line-height: 1.55;
+  color: #2B2826;
+  margin: 0;
+}
+
+/* Specimen Metrics Grid */
+.specimenMetricsGrid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 1rem;
+  border-top: 1px solid #D8CDBA;
+  border-bottom: 1px solid #D8CDBA;
+  padding: 1.25rem 0;
+}
+
+@media (max-width: 900px) {
+  .specimenMetricsGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 500px) {
+  .specimenMetricsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.metricCell {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.metricName {
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  color: #7A736E;
+  text-transform: uppercase;
+}
+
+.metricDigit {
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #2B2826;
+}
+
+/* Hourly Chronological Strip */
+.chronologicalSection {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.chronologicalTitle {
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  color: #7A736E;
+}
+
+.chronologicalStrip {
+  display: flex;
+  gap: 0.75rem;
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
+}
+
+.chronologicalCard {
+  flex: 0 0 88px;
+  background-color: #FAF7F0;
+  border: 1px solid #D8CDBA;
+  padding: 0.75rem 0.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  text-align: center;
+}
+
+.chronoTime {
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.72rem;
+  color: #7A736E;
+}
+
+.chronoIcon {
+  font-size: 1.35rem;
+  line-height: 1;
+}
+
+.chronoTemp {
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #2B2826;
+}
+
+/* 5-Day Outlook Section */
+.fiveDaySection {
+  background-color: #FFFDF9;
+  border: 1px solid #D8CDBA;
+  padding: 1.75rem;
+  box-shadow: 4px 4px 0px rgba(43, 40, 38, 0.08);
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
 }
 
-.cardSection {
-  background-color: #131924;
-  border: 1.5px solid #232d3f;
-  border-radius: 10px;
-  padding: 1.25rem;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+.fiveDayHeader {
   display: flex;
-  flex-direction: column;
-  gap: 0.9rem;
+  justify-content: space-between;
+  align-items: baseline;
+  border-bottom: 1px solid #2B2826;
+  padding-bottom: 0.75rem;
+  flex-wrap: wrap;
+  gap: 0.5rem;
 }
 
-.sectionHeading {
-  font-size: 0.95rem;
+.fiveDayTitle {
+  font-family: 'EB Garamond', serif;
+  font-size: 1.4rem;
   font-weight: 700;
+  color: #2B2826;
   margin: 0;
-  color: #f1f5f9;
+}
+
+.fiveDaySub {
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.7rem;
+  color: #7A736E;
+  letter-spacing: 0.05em;
+}
+
+.fiveDayTable {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.fiveDayRow {
+  display: grid;
+  grid-template-columns: 110px 140px 100px 1fr;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.65rem 0.75rem;
+  border-bottom: 1px dotted #D8CDBA;
+  transition: background-color 0.12s ease;
+}
+
+.fiveDayRow:hover {
+  background-color: #FAF7F0;
+}
+
+@media (max-width: 680px) {
+  .fiveDayRow {
+    grid-template-columns: 90px 1fr 110px;
+  }
+  .precipitationCol {
+    display: none;
+  }
+}
+
+.dayCol {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.dayName {
+  font-family: 'EB Garamond', serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #2B2826;
+}
+
+.dayDate {
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.72rem;
+  color: #7A736E;
+}
+
+.weatherIconCol {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  border-bottom: 1px solid #232d3f;
+  gap: 0.5rem;
+}
+
+.tableIcon {
+  font-size: 1.25rem;
+}
+
+.tableCondDesc {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.85rem;
+  color: #2B2826;
+}
+
+.precipitationCol {
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.75rem;
+}
+
+.popBadge {
+  color: #264633;
+  font-weight: 700;
+}
+
+.popZero {
+  color: #A8A29E;
+}
+
+.temperatureRangeCol {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  justify-content: flex-end;
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.85rem;
+}
+
+.tempLow {
+  color: #7A736E;
+  width: 36px;
+  text-align: right;
+}
+
+.rangeBarTrack {
+  flex: 1;
+  max-width: 140px;
+  height: 3px;
+  background-color: #E8E2D5;
+}
+
+.rangeBarFill {
+  height: 100%;
+  background-color: #8B2622;
+}
+
+.tempHigh {
+  color: #2B2826;
+  font-weight: 700;
+  width: 36px;
+  text-align: left;
+}
+
+/* Right Column Register Side Panel */
+.sideRegister {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+}
+
+.registerCard {
+  background-color: #FFFDF9;
+  border: 1px solid #D8CDBA;
+  padding: 1.5rem;
+  box-shadow: 3px 3px 0px rgba(43, 40, 38, 0.06);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.registerCardTitle {
+  font-family: 'EB Garamond', serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #2B2826;
+  margin: 0;
+  border-bottom: 1px solid #D8CDBA;
   padding-bottom: 0.5rem;
 }
 
-/* Search Box & Controls */
-.searchForm {
+.typewriterForm {
   display: flex;
   gap: 0.5rem;
 }
 
-.searchInput {
+.typewriterInput {
   flex: 1;
-  background-color: #0b0f16;
-  border: 1.5px solid #283347;
-  color: #ffffff;
-  padding: 0.55rem 0.8rem;
-  border-radius: 6px;
-  font-size: 0.9rem;
-  font-family: 'Plus Jakarta Sans', sans-serif;
+  background-color: #FAF7F0;
+  border: 1px solid #D8CDBA;
+  color: #2B2826;
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.82rem;
+  padding: 0.55rem 0.75rem;
   outline: none;
   transition: border-color 0.15s ease;
 }
 
-.searchInput:focus {
-  border-color: #3b82f6;
-  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+.typewriterInput:focus {
+  border-color: #8B2622;
 }
 
-.searchButton {
-  background-color: #2563eb;
-  border: none;
-  color: #ffffff;
-  padding: 0.55rem 0.9rem;
-  border-radius: 6px;
+.typewriterSubmitBtn {
+  background-color: #2B2826;
+  color: #FAF7F0;
+  border: 1px solid #2B2826;
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.8rem;
   font-weight: 700;
-  font-size: 0.85rem;
-  cursor: pointer;
-  transition: background-color 0.15s ease;
-}
-
-.searchButton:hover {
-  background-color: #1d4ed8;
-}
-
-.locateButton {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  background-color: #1a2230;
-  border: 1.5px solid #334155;
-  color: #f1f5f9;
-  padding: 0.6rem 1rem;
-  border-radius: 6px;
-  font-size: 0.85rem;
-  font-weight: 600;
+  padding: 0.55rem 0.85rem;
   cursor: pointer;
   transition: all 0.15s ease;
 }
 
-.locateButton:hover {
-  background-color: #243044;
-  border-color: #3b82f6;
-  color: #60a5fa;
+.typewriterSubmitBtn:hover:not(:disabled) {
+  background-color: #8B2622;
+  border-color: #8B2622;
 }
 
-.cityChipsRow {
+.quickStationChips {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   gap: 0.4rem;
 }
 
-.cityChip {
-  background-color: #1a2230;
-  border: 1px solid #2d384d;
-  color: #cbd5e1;
+.quickLabel {
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  color: #7A736E;
+}
+
+.chipsWrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.stationChip {
+  background-color: #FAF7F0;
+  border: 1px solid #D8CDBA;
+  color: #2B2826;
+  font-family: 'Courier Prime', monospace;
   font-size: 0.75rem;
-  padding: 0.3rem 0.6rem;
-  border-radius: 6px;
+  padding: 0.25rem 0.5rem;
   cursor: pointer;
-  font-family: 'JetBrains Mono', monospace;
   transition: all 0.12s ease;
 }
 
-.cityChip:hover {
-  background-color: #2563eb;
-  border-color: #2563eb;
-  color: #ffffff;
+.stationChip:hover {
+  background-color: #2B2826;
+  color: #FAF7F0;
 }
 
-/* Demo Presets Row */
-.demoPresetsRow {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0.5rem;
-}
-
-.presetStateButton {
-  background-color: #18202d;
-  border: 1px solid #2d384d;
-  color: #cbd5e1;
-  padding: 0.5rem;
-  border-radius: 6px;
-  font-size: 0.8rem;
-  font-weight: 600;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-  transition: all 0.15s ease;
-}
-
-.presetStateButton:hover {
-  background-color: #253147;
-  border-color: #60a5fa;
-  color: #ffffff;
-}
-
-/* Educational Info Card */
-.infoCard {
-  background-color: #10151f;
-  border: 1px dashed #283347;
-  border-radius: 8px;
-  padding: 0.9rem;
-}
-
-.infoCardTitle {
-  font-size: 0.82rem;
-  font-weight: 700;
-  color: #e2e8f0;
-  margin-bottom: 0.4rem;
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-  font-family: 'JetBrains Mono', monospace;
-}
-
-.infoCardText {
+/* Tactile Paper Slips (Rotated Sticky Notes) */
+.slipsExplainer {
+  font-family: 'Courier Prime', monospace;
   font-size: 0.75rem;
-  line-height: 1.5;
-  color: #94a3b8;
+  color: #7A736E;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.stickySlipsGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 0.5rem 0;
+}
+
+.paperSlip {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.2rem;
+  padding: 0.75rem 1rem;
+  border: 1px solid #D8CDBA;
+  cursor: pointer;
+  text-align: left;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease;
+  position: relative;
+  box-shadow: 2px 2px 5px rgba(43, 40, 38, 0.07);
+}
+
+.paperSlip:hover {
+  transform: rotate(0deg) scale(1.02) !important;
+  box-shadow: 4px 6px 12px rgba(43, 40, 38, 0.12);
+  z-index: 5;
+}
+
+.slipPin {
+  font-size: 0.75rem;
+  position: absolute;
+  top: 0.35rem;
+  right: 0.5rem;
+  opacity: 0.7;
+}
+
+.slipGlyph {
+  font-size: 1.3rem;
+  line-height: 1;
+}
+
+.slipTitle {
+  font-family: 'EB Garamond', serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #2B2826;
+}
+
+.slipSub {
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.7rem;
+  color: #7A736E;
+}
+
+/* Individual Slip Tints & Subtle Rotations */
+.slipYellow {
+  background-color: #FEF9EE;
+  border-color: #DDA15E;
+  transform: rotate(-1.5deg);
+}
+
+.slipKraft {
+  background-color: #EFE6D5;
+  border-color: #B5A180;
+  transform: rotate(1.2deg);
+}
+
+.slipSage {
+  background-color: #EAF0EB;
+  border-color: #4E6A55;
+  transform: rotate(-0.8deg);
+}
+
+.slipRose {
+  background-color: #F8EAE8;
+  border-color: #8B2622;
+  transform: rotate(1.8deg);
+}
+
+.slipIvory {
+  background-color: #FFFDF9;
+  border-color: #D8CDBA;
+  transform: rotate(-1.2deg);
+}
+
+/* Archival Colophon Card */
+.colophonCard {
+  background-color: #FAF7F0;
+  border: 1px dashed #D8CDBA;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.colophonHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.colophonSeal {
+  color: #8B2622;
+  font-weight: 700;
+  font-family: 'EB Garamond', serif;
+}
+
+.colophonTitle {
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: #2B2826;
+  text-transform: uppercase;
+}
+
+.colophonParagraph {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.8rem;
+  line-height: 1.55;
+  color: #4A4540;
   margin: 0;
 }
 
-/* Modal Dialog for API Key */
-.modalBackdrop {
+.codeTag {
+  font-family: 'Courier Prime', monospace;
+  background-color: #E8E2D5;
+  color: #8B2622;
+  padding: 0.1rem 0.3rem;
+  font-size: 0.72rem;
+}
+
+/* Library Checkout Card Modal */
+.modalOverlay {
   position: fixed;
   inset: 0;
-  background-color: rgba(0, 0, 0, 0.65);
-  backdrop-filter: blur(4px);
+  background-color: rgba(43, 40, 38, 0.6);
+  backdrop-filter: blur(3px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -522,87 +987,109 @@
   z-index: 100;
 }
 
-.modalWindow {
-  background-color: #131924;
-  border: 2px solid #2b374c;
-  border-radius: 12px;
+.libraryCardModal {
+  background-color: #FFFDF9;
+  border: 2px solid #2B2826;
+  box-shadow: 6px 6px 0px #2B2826;
   width: 100%;
-  max-width: 460px;
-  padding: 1.5rem;
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
+  max-width: 480px;
+  padding: 2rem;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 1.25rem;
 }
 
-.modalTitle {
-  font-size: 1.15rem;
+.libraryCardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  border-bottom: 1px solid #D8CDBA;
+  padding-bottom: 0.75rem;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.libraryCardTitle {
+  font-family: 'EB Garamond', serif;
+  font-size: 1.35rem;
   font-weight: 700;
+  color: #2B2826;
   margin: 0;
-  color: #ffffff;
 }
 
-.modalBody {
+.libraryCardBadge {
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.65rem;
+  color: #8B2622;
+  border: 1px solid #8B2622;
+  padding: 0.1rem 0.35rem;
+  letter-spacing: 0.05em;
+}
+
+.libraryCardBody {
+  font-family: 'Inter', sans-serif;
   font-size: 0.85rem;
   line-height: 1.5;
-  color: #cbd5e1;
+  color: #4A4540;
+  margin: 0;
 }
 
-.keyInput {
+.externalLink {
+  color: #8B2622;
+  text-decoration: underline;
+  font-weight: 600;
+}
+
+.cardInputField {
   width: 100%;
-  background-color: #0b0f16;
-  border: 1.5px solid #2b374c;
-  color: #ffffff;
-  padding: 0.6rem 0.8rem;
-  border-radius: 6px;
-  font-family: 'JetBrains Mono', monospace;
+  background-color: #FAF7F0;
+  border: 1px solid #2B2826;
+  color: #2B2826;
+  padding: 0.65rem 0.85rem;
+  font-family: 'Courier Prime', monospace;
   font-size: 0.85rem;
-  outline: none;
   box-sizing: border-box;
+  outline: none;
 }
 
-.keyInput:focus {
-  border-color: #3b82f6;
+.cardInputField:focus {
+  border-color: #8B2622;
+  box-shadow: 0 0 0 2px rgba(139, 38, 34, 0.15);
 }
 
-.modalActions {
+.cardActionsRow {
   display: flex;
   justify-content: flex-end;
-  gap: 0.6rem;
-  margin-top: 0.5rem;
+  gap: 0.75rem;
 }
 
-.modalCancelBtn {
-  background-color: transparent;
-  border: 1px solid #374151;
-  color: #cbd5e1;
+.cardDismissBtn {
+  background: none;
+  border: 1px solid #D8CDBA;
+  color: #7A736E;
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.82rem;
   padding: 0.5rem 1rem;
-  border-radius: 6px;
-  font-size: 0.85rem;
   cursor: pointer;
 }
 
-.modalSaveBtn {
-  background-color: #2563eb;
-  border: none;
-  color: #ffffff;
-  padding: 0.5rem 1.1rem;
-  border-radius: 6px;
+.cardDismissBtn:hover {
+  border-color: #2B2826;
+  color: #2B2826;
+}
+
+.cardRegisterBtn {
+  background-color: #8B2622;
+  border: 1px solid #8B2622;
+  color: #FAF7F0;
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.82rem;
   font-weight: 700;
-  font-size: 0.85rem;
+  padding: 0.5rem 1.15rem;
   cursor: pointer;
+  box-shadow: 2px 2px 0px #2B2826;
 }
 
-/* Error Banner */
-.errorBanner {
-  background-color: rgba(239, 68, 68, 0.15);
-  border: 1px solid #ef4444;
-  color: #fca5a5;
-  padding: 0.75rem 1rem;
-  border-radius: 8px;
-  font-size: 0.85rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 1.25rem;
+.cardRegisterBtn:hover {
+  background-color: #5F1D1B;
 }

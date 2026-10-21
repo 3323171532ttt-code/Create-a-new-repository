@@ -14,11 +14,14 @@
     "start": "next start"
   },
   "dependencies": {
+    "@notionhq/client": "^5.27.0",
     "@types/canvas-confetti": "^1.9.0",
+    "@types/three": "^0.186.0",
     "canvas-confetti": "^1.9.3",
     "next": "^15.5.25",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "three": "^0.186.1"
   },
   "devDependencies": {
     "@types/node": "^20",
