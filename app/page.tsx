@@ -52,12 +52,36 @@ export default function Home() {
       category: "INTERACTIVE",
     },
     {
-      title: "Local weather",
-      description: "Live local weather dashboard powered by OpenWeatherMap and geolocation",
-      path: "/prototypes/weather-display",
+      title: "Local Weather",
+      description: "Live local area weather detection via browser Geolocation, 5-day outlook, and hourly timeline powered by OpenWeatherMap API",
+      path: "/prototypes/local-weather",
       icon: "🌦️",
-      badge: "API",
+      badge: "API & TOOLS",
       category: "API & TOOLS",
+    },
+    {
+      title: "Meteorological archive",
+      description: "Tactile editorial weather broadside with ambient poetry, 5-day outlook, and GPS telemetry powered by OpenWeatherMap",
+      path: "/prototypes/weather-display",
+      icon: "📜",
+      badge: "EDITORIAL & API",
+      category: "API & TOOLS",
+    },
+    {
+      title: "My bookshelf",
+      description: "Tactile reading tracker and book gallery powered by the Notion API (2026-03-11 Data Sources)",
+      path: "/prototypes/my-bookshelf",
+      icon: "📚",
+      badge: "NOTION API",
+      category: "API & TOOLS",
+    },
+    {
+      title: "Minimalist bookshelf",
+      description: "Quiet editorial personal library & media collection with 6-column grid and staggered skeleton slots",
+      path: "/prototypes/minimalist-bookshelf",
+      icon: "📖",
+      badge: "EDITORIAL UI",
+      category: "INTERACTIVE",
     },
     {
       title: "Getting started",
@@ -366,7 +390,7 @@ export default function Home() {
               />
               <div className={styles.pinstripes} />
               <h2 className={styles.windowTitle}>
-                <span>Elizabeth's prototypes</span>
+                <span>Shuotong's prototypes</span>
                 <span className={styles.titleTag}>SYS-2084</span>
               </h2>
               <div className={styles.pinstripes} />
@@ -487,7 +511,7 @@ export default function Home() {
           >
             <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
               <span>📁</span>
-              <strong>Elizabeth's prototypes (Minimized) — Click to restore window</strong>
+              <strong>Shuotong's prototypes (Minimized) — Click to restore window</strong>
             </div>
           </div>
         )}
@@ -557,7 +581,7 @@ export default function Home() {
                 <div>
                   <h3 className={styles.aboutTitleH1}>System 2084</h3>
                   <p className={styles.aboutSubtitle}>
-                    Elizabeth Edition • Release v7.84-NEO
+                    Shuotong's Edition • Release v7.84-NEO
                   </p>
                 </div>
               </div>
