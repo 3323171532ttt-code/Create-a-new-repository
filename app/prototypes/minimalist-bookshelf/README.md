@@ -1,47 +1,52 @@
-# Modern Minimalist Bookshelf & Personal Library
+# Modern Minimalist Bookshelf - Reading Dashboard
 
-An editorial, minimalist personal collection and bookshelf interface built for the **"Prototyping for Masters"** workshop. Inspired by the quiet, typography-first aesthetic of curated design portfolios (such as Paco Coursey's curated grids and contemporary design studios).
+A premium, minimalist reading dashboard and personal library archive built for the **"Prototyping for Masters"** workshop. Featuring a warm ivory aesthetic, structured left sidebar navigation, top search bar, and three horizontal floating shelves (**Currently Reading**, **Next Up**, and **Finished**) with realistic upright standing book displays, subtle shadows, and full interactivity.
 
 ---
 
-## Key Design Principles
+## Key Features & Design Principles
 
-1. **Quiet Container & Negative Space**:
-   - Page backdrop in soft, light neutral gray (`#F6F6F6`).
-   - Centered pure-white card container (`border-radius: 22px`) with soft atmospheric elevation (`box-shadow: 0 16px 40px -8px rgba(0, 0, 0, 0.05)`).
-   - Zero distracting borders or ornamentation: the primary visual color and emphasis comes entirely from the curated book and media cover art.
+1. **Warm Ivory Minimalist Canvas**:
+   - Palette based on warm stone and ivory cream (`#FAF7F2`).
+   - Clean floating shelves with subtle 3D depth, bevel highlights, and soft contact shadows.
+   - Upright standing books with spine gradients and drop shadows that mimic real books on a floating wall shelf.
 
-2. **Editorial Comma-Delimited Navigation**:
-   - Filter bar centered at the top of the card container.
-   - Tags: **All, Books, Music, Movies, Art, Design, Recipes, Photography, Random, Pinned**.
-   - Inactive tags rendered in quiet muted gray (`#AAAAAA`), active tag highlighted in crisp black (`#000000`, font-weight `700`).
-   - Clean typographic separation using subtle commas.
+2. **Left Sidebar Navigation**:
+   - **Branding**: Monogram badge and editorial title ("Bookshelf.").
+   - **Tabs**:
+     - **My Library**: The primary 3-shelf reading dashboard.
+     - **Home**: Curated highlights, reading essays, and featured books.
+     - **Shop**: Independent press recommendations and bookbinding accessories.
+     - **News**: Literary dispatches, author reflections, and preservation guides.
+   - **2026 Reading Goal**: Live progress bar tracking completed volumes.
+   - **User Profile**: Active curator avatar and status indicator.
 
-3. **6-Column Staggered Grid**:
-   - Desktop: strict 6-column CSS Grid (`grid-template-columns: repeat(6, 1fr)`).
-   - Standard 2:3 aspect ratio (`aspect-ratio: 2 / 3`) with subtle 6px corner radii.
-   - Intersperse real media covers with light-gray skeleton placeholder blocks (`#F1F1F1`) to create an authentic staggered shelf rhythm.
+3. **Three Horizontal Floating Bookshelves**:
+   - **Currently Reading**: Active books with dynamic reading progress bars and page numbers.
+   - **Next Up**: Queued titles with format badges.
+   - **Finished**: Completed library archive with star ratings.
+   - **Controls**: Section count badges, "See all" links, and horizontal carousel scroll buttons (`‹` `›`).
 
-4. **Responsive Scaling**:
-   - **Desktop (>1024px)**: 6 columns.
-   - **Tablet (640px – 1024px)**: 4 columns.
-   - **Mobile (<640px)**: 2 columns with reduced padding and compact typography.
+4. **Live Search & Category Filters**:
+   - Real-time search matching title, author, curator notes, and tags.
+   - Category filter chips (*All, Books, Design, Art, Cinema, Music, Photography, Pinned*).
+   - "✧ Surprise Me" random discovery button.
 
-5. **Modal Inspection**:
-   - Click any item card to open a balanced two-column modal showing enlarged artwork, category, release year, creator, and notes.
+5. **Interactive Monograph Dialog**:
+   - Click any upright book to view its detailed monograph.
+   - Displays cover, title, author, year, curator note, and memorable quote.
+   - **Live Shelf Mover**: Instantly move books between *Currently Reading*, *Next Up*, and *Finished*.
+   - **Pin Favorites**: Toggle favorite status with instantaneous updates.
+   - Keyboard navigation (`Esc` to close, `ArrowLeft` / `ArrowRight` to browse books).
+
+6. **100% Reliable Local Covers**:
+   - All 18 reference books use high-resolution local images in `/prototypes/minimalist-bookshelf/covers/`.
+   - Automatic typographic fallback ensures zero broken image placeholders.
 
 ---
 
 ## File Architecture
 
-- [`page.tsx`](./page.tsx): Main interactive React component managing active category filters, skeleton rendering, and modal inspection state.
-- [`styles.module.css`](./styles.module.css): Scoped CSS Module styling adhering strictly to `AGENTS.md` rules (no bare HTML element selectors).
-- [`data.ts`](./data.ts): Typed dataset of curated books, albums, films, and art objects with placeholder slots.
-
----
-
-## How to Customize
-
-- **Add New Items**: Open [`data.ts`](./data.ts) and add a new entry to `SHELF_ITEMS` with your own title, creator, category, and cover image path.
-- **Adjust Columns**: Edit the `.grid` selector in [`styles.module.css`](./styles.module.css) to modify `grid-template-columns` or gap spacing.
-- **Change Default Category**: In [`page.tsx`](./page.tsx), adjust `useState<Category>("All")` to `"Books"` or any desired initial tag.
+- [`page.tsx`](./page.tsx): Main interactive React dashboard component.
+- [`styles.module.css`](./styles.module.css): Scoped CSS Module styling adhering strictly to `AGENTS.md` rules (no bare HTML element selectors, scoped classes only).
+- [`data.ts`](./data.ts): Typed dataset with reading statuses, progress metrics, and curated book metadata.

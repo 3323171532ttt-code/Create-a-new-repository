@@ -1,287 +1,915 @@
-.pageWrapper {
+/* Minimalist Bookshelf - Reading Dashboard Styles */
+
+.pageLayout {
+  display: flex;
   min-height: 100vh;
-  background-color: #F6F6F6;
-  padding: 48px 24px 80px;
+  background-color: #FAF7F2;
+  color: #1C1917;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ================= LEFT SIDEBAR ================= */
+.sidebar {
+  width: 270px;
+  min-width: 270px;
+  background-color: #F4EFE6;
+  border-right: 1px solid rgba(28, 25, 23, 0.08);
   display: flex;
   flex-direction: column;
-  align-items: center;
-  box-sizing: border-box;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  color: #111111;
-  -webkit-font-smoothing: antialiased;
-}
-
-.topBar {
-  width: 100%;
-  max-width: 1140px;
-  display: flex;
   justify-content: space-between;
-  align-items: center;
-  margin-bottom: 24px;
-}
-
-.backLink {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 13px;
-  font-weight: 500;
-  color: #777777;
-  text-decoration: none;
-  padding: 6px 12px;
-  border-radius: 20px;
-  background-color: #FFFFFF;
-  border: 1px solid #EBEBEB;
-  transition: all 0.15s ease;
-}
-
-.backLink:hover {
-  color: #000000;
-  border-color: #D6D6D6;
-  background-color: #FAFAFA;
-}
-
-.headerMeta {
-  font-size: 13px;
-  color: #888888;
-  font-variant-numeric: tabular-nums;
-}
-
-.cardContainer {
-  background-color: #FFFFFF;
-  width: 100%;
-  max-width: 1140px;
-  border-radius: 22px;
-  box-shadow: 0 16px 40px -8px rgba(0, 0, 0, 0.05), 0 2px 6px rgba(0, 0, 0, 0.02);
-  padding: 48px 48px 64px;
+  padding: 32px 24px;
+  position: sticky;
+  top: 0;
+  height: 100vh;
   box-sizing: border-box;
+  z-index: 40;
 }
 
-.filterBar {
+.sidebarTop {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
+  gap: 36px;
+}
+
+.logoRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-decoration: none;
+  color: inherit;
+}
+
+.logoBrand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logoIconBadge {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background-color: #1C1917;
+  color: #FAF7F2;
+  display: flex;
+  align-items: center;
   justify-content: center;
-  align-items: center;
-  gap: 4px 2px;
-  margin-bottom: 48px;
-}
-
-.filterItemWrapper {
-  display: inline-flex;
-  align-items: center;
-}
-
-.filterButton {
-  background: none;
-  border: none;
-  padding: 4px 6px;
-  cursor: pointer;
-  font-size: 15px;
-  font-weight: 400;
-  color: #AAAAAA;
-  transition: color 0.15s ease, font-weight 0.15s ease;
-  outline: none;
-  border-radius: 4px;
-}
-
-.filterButton:hover {
-  color: #444444;
-}
-
-.filterButtonActive {
-  color: #000000;
+  font-size: 18px;
   font-weight: 700;
+  box-shadow: 0 4px 12px rgba(28, 25, 23, 0.15);
 }
 
-.filterSeparator {
-  color: #AAAAAA;
-  font-size: 14px;
-  margin-left: 2px;
-  user-select: none;
+.logoTextCol {
+  display: flex;
+  flex-direction: column;
 }
 
-.grid {
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  gap: 18px;
-  width: 100%;
+.logoTitle {
+  font-family: ui-serif, "Charter", "Georgia", serif;
+  font-size: 19px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #1C1917;
+  margin: 0;
+  line-height: 1.2;
 }
 
-.itemCard {
-  position: relative;
-  aspect-ratio: 2 / 3;
-  width: 100%;
+.logoSubtitle {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #78716C;
+  margin: 0;
+}
+
+.backHomeLink {
+  font-size: 12px;
+  color: #78716C;
+  text-decoration: none;
+  padding: 4px 8px;
   border-radius: 6px;
-  overflow: hidden;
-  cursor: pointer;
-  background-color: #F0F0F0;
-  transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.22s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 2px 8px -2px rgba(0, 0, 0, 0.06);
-  border: none;
+  border: 1px solid rgba(28, 25, 23, 0.1);
+  background-color: rgba(255, 255, 255, 0.4);
+  transition: all 0.2s ease;
+}
+
+.backHomeLink:hover {
+  background-color: #FFFFFF;
+  color: #1C1917;
+}
+
+/* Sidebar Navigation Items */
+.navMenu {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  list-style: none;
+  margin: 0;
   padding: 0;
-  display: block;
+}
+
+.navItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: none;
+  background: transparent;
+  color: #57534E;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
   text-align: left;
 }
 
-.itemCard:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 12px 24px -6px rgba(0, 0, 0, 0.12), 0 2px 6px rgba(0, 0, 0, 0.04);
+.navItem:hover {
+  background-color: rgba(255, 255, 255, 0.6);
+  color: #1C1917;
+  transform: translateX(2px);
 }
 
-.coverImage {
+.navItemActive {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: none;
+  background-color: #FFFFFF;
+  color: #1C1917;
+  font-size: 14px;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(28, 25, 23, 0.05);
+  cursor: pointer;
+}
+
+.navLeft {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.navIcon {
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.navBadge {
+  background-color: #E7E0D3;
+  color: #44403C;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 9999px;
+}
+
+/* Reading Goal Card in Sidebar */
+.goalCard {
+  background-color: rgba(255, 255, 255, 0.65);
+  border: 1px solid rgba(28, 25, 23, 0.06);
+  border-radius: 16px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.goalCardHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.goalCardTitle {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #78716C;
+  margin: 0;
+}
+
+.goalCardBadge {
+  font-size: 11px;
+  font-weight: 600;
+  color: #2E7D32;
+  background-color: #E8F5E9;
+  padding: 2px 6px;
+  border-radius: 6px;
+}
+
+.goalProgressTrack {
+  width: 100%;
+  height: 6px;
+  background-color: #E7E0D3;
+  border-radius: 9999px;
+  overflow: hidden;
+}
+
+.goalProgressFill {
+  height: 100%;
+  background-color: #1C1917;
+  border-radius: 9999px;
+  transition: width 0.4s ease;
+}
+
+.goalCardMeta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 11px;
+  color: #78716C;
+}
+
+.goalStatsStrong {
+  color: #1C1917;
+  font-weight: 600;
+}
+
+/* User Profile Section at bottom of Sidebar */
+.sidebarBottom {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.userProfileCard {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 14px;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 14px;
+  border: 1px solid rgba(28, 25, 23, 0.05);
+}
+
+.userProfileLeft {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.userAvatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 9999px;
+  background: linear-gradient(135deg, #A8A29E, #57534E);
+  color: #FAF7F2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 600;
+  box-shadow: 0 2px 6px rgba(28, 25, 23, 0.12);
+}
+
+.userNameCol {
+  display: flex;
+  flex-direction: column;
+}
+
+.userName {
+  font-size: 13px;
+  font-weight: 600;
+  color: #1C1917;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.userRole {
+  font-size: 11px;
+  color: #78716C;
+  margin: 0;
+}
+
+.statusIndicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 9999px;
+  background-color: #10B981;
+  box-shadow: 0 0 0 2px #F4EFE6;
+}
+
+/* ================= MAIN CONTENT AREA ================= */
+.mainContent {
+  flex: 1;
+  padding: 36px 48px 80px 48px;
+  max-width: 1380px;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+/* Top Dashboard Bar (Search + Quick Tools) */
+.dashboardTopBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 36px;
+  flex-wrap: wrap;
+}
+
+.searchWrapper {
+  position: relative;
+  flex: 1;
+  min-width: 280px;
+  max-width: 540px;
+}
+
+.searchIcon {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #A8A29E;
+  font-size: 15px;
+  pointer-events: none;
+}
+
+.searchInput {
+  width: 100%;
+  height: 46px;
+  padding: 0 44px 0 44px;
+  border-radius: 14px;
+  border: 1px solid rgba(28, 25, 23, 0.08);
+  background-color: #FFFFFF;
+  color: #1C1917;
+  font-size: 14px;
+  outline: none;
+  box-shadow: 0 2px 8px rgba(28, 25, 23, 0.03);
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+}
+
+.searchInput:focus {
+  border-color: #1C1917;
+  box-shadow: 0 4px 16px rgba(28, 25, 23, 0.08);
+}
+
+.searchClearButton {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  background: transparent;
+  color: #78716C;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.searchShortcutHint {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: #F4EFE6;
+  border: 1px solid rgba(28, 25, 23, 0.1);
+  border-radius: 6px;
+  padding: 2px 6px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #78716C;
+  pointer-events: none;
+}
+
+.topBarRightActions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.surpriseButton {
+  height: 44px;
+  padding: 0 18px;
+  border-radius: 12px;
+  border: 1px solid rgba(28, 25, 23, 0.1);
+  background-color: #FFFFFF;
+  color: #1C1917;
+  font-size: 13px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(28, 25, 23, 0.03);
+  transition: all 0.2s ease;
+}
+
+.surpriseButton:hover {
+  background-color: #1C1917;
+  color: #FAF7F2;
+  border-color: #1C1917;
+  transform: translateY(-1px);
+}
+
+.surpriseIcon {
+  font-size: 15px;
+}
+
+/* Category Filter Chips Bar */
+.filterChipsRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 6px;
+  margin-bottom: 40px;
+  scrollbar-width: none;
+}
+
+.filterChipsRow::-webkit-scrollbar {
+  display: none;
+}
+
+.filterChip {
+  padding: 7px 15px;
+  border-radius: 9999px;
+  border: 1px solid rgba(28, 25, 23, 0.08);
+  background-color: rgba(255, 255, 255, 0.7);
+  color: #57534E;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+}
+
+.filterChip:hover {
+  background-color: #FFFFFF;
+  color: #1C1917;
+  border-color: rgba(28, 25, 23, 0.16);
+}
+
+.filterChipActive {
+  padding: 7px 15px;
+  border-radius: 9999px;
+  border: 1px solid #1C1917;
+  background-color: #1C1917;
+  color: #FAF7F2;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  box-shadow: 0 2px 8px rgba(28, 25, 23, 0.15);
+}
+
+/* ================= THREE HORIZONTAL BOOKSHELVES ================= */
+.shelfSection {
+  margin-bottom: 56px;
+  position: relative;
+}
+
+.shelfSectionHeader {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 22px;
+  border-bottom: 1px solid rgba(28, 25, 23, 0.06);
+  padding-bottom: 14px;
+}
+
+.shelfTitleCol {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.shelfTitleRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.shelfTitleText {
+  font-family: ui-serif, "Charter", "Georgia", serif;
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #1C1917;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.shelfBadge {
+  background-color: #EBE4D5;
+  color: #57534E;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 3px 9px;
+  border-radius: 9999px;
+}
+
+.shelfSubtitleText {
+  font-size: 13px;
+  color: #78716C;
+  margin: 0;
+}
+
+.shelfActionsRow {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.shelfSeeAllLink {
+  font-size: 13px;
+  font-weight: 600;
+  color: #1C1917;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  padding: 4px 6px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.shelfSeeAllLink:hover {
+  background-color: rgba(28, 25, 23, 0.05);
+  color: #000000;
+}
+
+.shelfCarouselControls {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.shelfArrowButton {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  border: 1px solid rgba(28, 25, 23, 0.1);
+  background-color: #FFFFFF;
+  color: #1C1917;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.shelfArrowButton:hover {
+  background-color: #1C1917;
+  color: #FAF7F2;
+  border-color: #1C1917;
+}
+
+/* The Floating Bookshelf Container & Ledge */
+.floatingShelfContainer {
+  position: relative;
+  padding-bottom: 24px;
+}
+
+.booksScrollTrack {
+  display: flex;
+  align-items: flex-end;
+  gap: 32px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding: 18px 8px 0px 8px;
+  scrollbar-width: none;
+  box-sizing: border-box;
+}
+
+.booksScrollTrack::-webkit-scrollbar {
+  display: none;
+}
+
+/* Individual Upright Standing Book Card */
+.bookStandCard {
+  width: 162px;
+  min-width: 162px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.28s cubic-bezier(0.2, 0, 0, 1);
+  outline: none;
+}
+
+.bookStandCard:hover {
+  transform: translateY(-8px);
+}
+
+.bookCoverBox {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  border-radius: 3px 8px 8px 3px;
+  overflow: hidden;
+  background-color: #EAE6DF;
+  /* Realistic physical book shadow cast onto the floating shelf */
+  box-shadow:
+    -3px 8px 18px -4px rgba(28, 25, 23, 0.28),
+    0 2px 6px -1px rgba(28, 25, 23, 0.12),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.15);
+  transition: box-shadow 0.28s cubic-bezier(0.2, 0, 0, 1);
+}
+
+.bookStandCard:hover .bookCoverBox {
+  box-shadow:
+    -4px 16px 28px -6px rgba(28, 25, 23, 0.35),
+    0 4px 10px -2px rgba(28, 25, 23, 0.15),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.3);
+}
+
+.bookCoverImg {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
 }
 
-.coverFallback {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  padding: 16px 14px;
-  box-sizing: border-box;
-  background-color: #E8E8E8;
-}
-
-.fallbackTitle {
-  font-size: 13px;
-  font-weight: 600;
-  color: #222222;
-  line-height: 1.3;
-  margin: 0 0 4px;
-}
-
-.fallbackCreator {
-  font-size: 11px;
-  color: #666666;
-  margin: 0;
-}
-
-.cardOverlay {
+/* Spine Shadow Overlay to simulate physical book hinge */
+.bookSpineHighlight {
   position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 60%, rgba(0, 0, 0, 0.4) 100%);
-  opacity: 0;
-  transition: opacity 0.2s ease;
-  display: flex;
-  align-items: flex-end;
-  padding: 12px;
-  box-sizing: border-box;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 12px;
+  background: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0.22) 0%,
+    rgba(0, 0, 0, 0.08) 50%,
+    transparent 100%
+  );
   pointer-events: none;
 }
 
-.itemCard:hover .cardOverlay {
-  opacity: 1;
+.bookPageEdgeGlow {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 4px;
+  background: linear-gradient(
+    to left,
+    rgba(255, 255, 255, 0.25) 0%,
+    transparent 100%
+  );
+  pointer-events: none;
 }
 
-.overlayText {
-  color: #FFFFFF;
-  font-size: 11px;
-  font-weight: 500;
-  line-height: 1.25;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+/* Floating Shelf Physical Ledge */
+.physicalShelfLedge {
+  width: 100%;
+  height: 14px;
+  margin-top: 0px;
+  background: linear-gradient(
+    to bottom,
+    #ECE5D8 0%,
+    #DDD5C4 50%,
+    #C8BFA9 100%
+  );
+  border-radius: 4px;
+  border-top: 1px solid rgba(255, 255, 255, 0.7);
+  box-shadow:
+    0 8px 18px -4px rgba(28, 25, 23, 0.16),
+    0 2px 4px rgba(28, 25, 23, 0.08);
+  position: relative;
+  z-index: 5;
+}
+
+/* Book Metadata Below Ledge */
+.bookCardDetails {
+  padding-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.bookCardTitle {
+  font-size: 13px;
+  font-weight: 600;
+  color: #1C1917;
+  margin: 0;
+  line-height: 1.3;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-.pinnedIndicator {
+.bookCardAuthor {
+  font-size: 12px;
+  color: #78716C;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Reading Progress Bar for Currently Reading items */
+.bookProgressRow {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 4px;
+}
+
+.bookProgressBarTrack {
+  width: 100%;
+  height: 4px;
+  background-color: #E7E0D3;
+  border-radius: 9999px;
+  overflow: hidden;
+}
+
+.bookProgressBarFill {
+  height: 100%;
+  background-color: #E05A47;
+  border-radius: 9999px;
+  transition: width 0.3s ease;
+}
+
+.bookProgressLabel {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 10px;
+  color: #78716C;
+  font-weight: 500;
+}
+
+/* Star Rating for Finished items */
+.bookStarRatingRow {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  margin-top: 2px;
+  color: #E5A93C;
+  font-size: 11px;
+}
+
+/* Pin Toggle Button on Book Card */
+.bookPinToggle {
   position: absolute;
   top: 8px;
   right: 8px;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background-color: #000000;
-  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.85);
-}
-
-.skeletonCard {
-  aspect-ratio: 2 / 3;
-  width: 100%;
-  border-radius: 6px;
-  background-color: #F1F1F1;
-  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.02);
-  transition: background-color 0.2s ease;
+  width: 28px;
+  height: 28px;
+  border-radius: 9999px;
+  background-color: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(28, 25, 23, 0.1);
+  color: #78716C;
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: default;
+  font-size: 13px;
+  cursor: pointer;
+  opacity: 0;
+  transform: scale(0.9);
+  transition: all 0.2s ease;
+  z-index: 10;
+}
+
+.bookStandCard:hover .bookPinToggle {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.bookPinToggleActive {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 28px;
+  height: 28px;
+  border-radius: 9999px;
+  background-color: #1C1917;
+  color: #FAF7F2;
+  border: 1px solid #1C1917;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  cursor: pointer;
+  opacity: 1;
+  z-index: 10;
+}
+
+/* Fallback Typographical Book Cover (When Image fails) */
+.fallbackCoverBox {
+  width: 100%;
+  height: 100%;
+  padding: 16px 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-sizing: border-box;
+  color: #1C1917;
   position: relative;
 }
 
-.skeletonCard:hover {
-  background-color: #ECECEC;
+.fallbackTitle {
+  font-family: ui-serif, "Charter", "Georgia", serif;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.3;
+  margin: 0;
 }
 
-.skeletonPlus {
-  color: #CCCCCC;
-  font-size: 16px;
-  font-weight: 300;
-  opacity: 0;
-  transition: opacity 0.2s ease;
-}
-
-.skeletonCard:hover .skeletonPlus {
-  opacity: 1;
-}
-
-.shelfFooter {
-  margin-top: 48px;
-  padding-top: 24px;
-  border-top: 1px solid #F0F0F0;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 12px;
-  color: #999999;
-}
-
-.footerLeft {
-  display: flex;
-  gap: 16px;
-}
-
-.footerCounter {
+.fallbackAuthor {
+  font-size: 11px;
   font-weight: 500;
-  color: #333333;
+  opacity: 0.8;
+  margin: 0;
 }
 
+/* ================= MODAL MONOGRAPH DIALOG ================= */
 .modalBackdrop {
   position: fixed;
   inset: 0;
-  background-color: rgba(0, 0, 0, 0.45);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
+  background-color: rgba(28, 25, 23, 0.55);
+  backdrop-filter: blur(8px);
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 24px;
-  z-index: 1000;
-  animation: fadeIn 0.18s ease-out;
+  z-index: 100;
+  animation: fadeIn 0.2s ease-out;
 }
 
-.modalContent {
-  background-color: #FFFFFF;
-  border-radius: 18px;
-  max-width: 600px;
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.modalCard {
+  background-color: #FAF7F2;
+  border-radius: 24px;
+  border: 1px solid rgba(28, 25, 23, 0.1);
+  box-shadow: 0 25px 60px -12px rgba(28, 25, 23, 0.35);
+  max-width: 820px;
   width: 100%;
-  overflow: hidden;
-  box-shadow: 0 24px 64px -12px rgba(0, 0, 0, 0.2);
-  display: flex;
-  flex-direction: row;
+  max-height: 90vh;
+  overflow-y: auto;
   position: relative;
-  animation: scaleIn 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  gap: 36px;
+  padding: 40px;
+  box-sizing: border-box;
 }
 
-.modalCoverSection {
-  width: 44%;
+.modalCloseButton {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 36px;
+  height: 36px;
+  border-radius: 9999px;
+  background-color: #EFE9DD;
+  border: 1px solid rgba(28, 25, 23, 0.08);
+  color: #1C1917;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.modalCloseButton:hover {
+  background-color: #1C1917;
+  color: #FAF7F2;
+}
+
+.modalCoverCol {
+  width: 260px;
+  min-width: 260px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.modalCoverWrapper {
+  width: 100%;
   aspect-ratio: 2 / 3;
-  background-color: #F0F0F0;
-  flex-shrink: 0;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow:
+    -4px 18px 32px -8px rgba(28, 25, 23, 0.35),
+    0 4px 12px rgba(28, 25, 23, 0.15);
+  background-color: #EAE6DF;
 }
 
 .modalCoverImg {
@@ -291,131 +919,417 @@
   display: block;
 }
 
-.modalInfoSection {
-  padding: 32px 28px;
+.modalInfoCol {
+  flex: 1;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  box-sizing: border-box;
+  gap: 20px;
+}
+
+.modalCategoryPill {
+  display: inline-block;
+  align-self: flex-start;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #78716C;
+  background-color: #EFE9DD;
+  padding: 4px 10px;
+  border-radius: 9999px;
+}
+
+.modalBookTitle {
+  font-family: ui-serif, "Charter", "Georgia", serif;
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #1C1917;
+  margin: 6px 0 4px 0;
+  line-height: 1.2;
+}
+
+.modalBookAuthor {
+  font-size: 16px;
+  color: #57534E;
+  margin: 0;
+}
+
+.modalQuoteBox {
+  font-family: ui-serif, "Charter", "Georgia", serif;
+  font-style: italic;
+  font-size: 15px;
+  color: #44403C;
+  background-color: #F3EFE6;
+  border-left: 3px solid #1C1917;
+  padding: 12px 16px;
+  border-radius: 0 10px 10px 0;
+  margin: 12px 0;
+  line-height: 1.5;
+}
+
+.modalCuratorNote {
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: #57534E;
+  background-color: #FFFFFF;
+  border: 1px solid rgba(28, 25, 23, 0.08);
+  border-radius: 12px;
+  padding: 14px 16px;
+}
+
+.modalNoteHeading {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #78716C;
+  margin: 0 0 6px 0;
+}
+
+/* Shelf Relocation Controls in Modal */
+.modalShelfControlBox {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.modalShelfLabel {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #78716C;
+}
+
+.modalShelfButtonsRow {
+  display: flex;
+  gap: 8px;
+}
+
+.modalShelfButton {
+  flex: 1;
+  padding: 8px 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(28, 25, 23, 0.12);
+  background-color: #FFFFFF;
+  color: #57534E;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.modalShelfButton:hover {
+  background-color: #F4EFE6;
+  color: #1C1917;
+}
+
+.modalShelfButtonActive {
+  flex: 1;
+  padding: 8px 12px;
+  border-radius: 10px;
+  border: 1px solid #1C1917;
+  background-color: #1C1917;
+  color: #FAF7F2;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(28, 25, 23, 0.15);
+}
+
+.modalFooterActions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid rgba(28, 25, 23, 0.08);
+  padding-top: 18px;
+  margin-top: 10px;
+}
+
+.modalNavArrows {
+  display: flex;
+  gap: 8px;
+}
+
+.modalArrowButton {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  border: 1px solid rgba(28, 25, 23, 0.12);
+  background-color: #FFFFFF;
+  color: #1C1917;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.modalArrowButton:hover {
+  background-color: #1C1917;
+  color: #FAF7F2;
+}
+
+.modalPinButton {
+  height: 36px;
+  padding: 0 16px;
+  border-radius: 10px;
+  border: 1px solid rgba(28, 25, 23, 0.12);
+  background-color: #FFFFFF;
+  color: #1C1917;
+  font-size: 13px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.modalPinButton:hover {
+  background-color: #F4EFE6;
+}
+
+.modalPinButtonActive {
+  height: 36px;
+  padding: 0 16px;
+  border-radius: 10px;
+  border: 1px solid #1C1917;
+  background-color: #1C1917;
+  color: #FAF7F2;
+  font-size: 13px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+}
+
+/* Toast Notification */
+.toastPill {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background-color: #1C1917;
+  color: #FAF7F2;
+  padding: 12px 20px;
+  border-radius: 9999px;
+  font-size: 13px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 8px 24px rgba(28, 25, 23, 0.25);
+  z-index: 200;
+  animation: slideUp 0.25s ease-out;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.toastDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 9999px;
+  background-color: #10B981;
+}
+
+/* Alternative Views: Home, Shop, News */
+.viewContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.viewHeroCard {
+  background-color: #FFFFFF;
+  border: 1px solid rgba(28, 25, 23, 0.08);
+  border-radius: 20px;
+  padding: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  box-shadow: 0 4px 16px rgba(28, 25, 23, 0.03);
+}
+
+.viewHeroTextCol {
   flex: 1;
 }
 
-.modalTag {
-  display: inline-block;
-  font-size: 11px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  color: #888888;
-  margin-bottom: 8px;
-}
-
-.modalTitle {
-  font-size: 20px;
+.viewHeroTitle {
+  font-family: ui-serif, "Charter", "Georgia", serif;
+  font-size: 32px;
   font-weight: 700;
-  color: #111111;
-  line-height: 1.25;
-  margin: 0 0 6px;
+  letter-spacing: -0.02em;
+  color: #1C1917;
+  margin: 0 0 12px 0;
+  line-height: 1.2;
 }
 
-.modalCreator {
-  font-size: 14px;
-  color: #666666;
-  margin: 0 0 16px;
-}
-
-.modalDescription {
-  font-size: 13px;
+.viewHeroDesc {
+  font-size: 15px;
   line-height: 1.6;
-  color: #444444;
-  margin: 0 0 20px;
+  color: #57534E;
+  margin: 0 0 20px 0;
+  max-width: 580px;
 }
 
-.modalCloseBtn {
-  align-self: flex-start;
-  background-color: #111111;
-  color: #FFFFFF;
+.viewHeroCta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  border-radius: 12px;
+  background-color: #1C1917;
+  color: #FAF7F2;
+  font-size: 14px;
+  font-weight: 600;
   border: none;
-  padding: 8px 18px;
-  border-radius: 20px;
-  font-size: 12px;
-  font-weight: 500;
   cursor: pointer;
-  transition: background-color 0.15s ease;
+  transition: all 0.2s ease;
 }
 
-.modalCloseBtn:hover {
-  background-color: #333333;
+.viewHeroCta:hover {
+  background-color: #44403C;
+  transform: translateY(-1px);
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+.viewGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
 }
 
-@keyframes scaleIn {
-  from {
-    opacity: 0;
-    transform: scale(0.96);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
+.articleCard {
+  background-color: #FFFFFF;
+  border: 1px solid rgba(28, 25, 23, 0.08);
+  border-radius: 16px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
+.articleCard:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(28, 25, 23, 0.06);
+}
+
+.articleDate {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #78716C;
+}
+
+.articleTitle {
+  font-family: ui-serif, "Charter", "Georgia", serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: #1C1917;
+  margin: 0;
+  line-height: 1.3;
+}
+
+.articleExcerpt {
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: #57534E;
+  margin: 0;
+}
+
+/* Empty Shelf State */
+.emptyShelfBox {
+  width: 100%;
+  padding: 36px 24px;
+  border: 1px dashed rgba(28, 25, 23, 0.15);
+  border-radius: 12px;
+  background-color: rgba(255, 255, 255, 0.5);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: #78716C;
+  font-size: 13px;
+  margin-bottom: 12px;
+}
+
+.emptyShelfResetBtn {
+  margin-top: 8px;
+  padding: 6px 14px;
+  border-radius: 8px;
+  border: 1px solid rgba(28, 25, 23, 0.15);
+  background-color: #FFFFFF;
+  color: #1C1917;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* ================= RESPONSIVE MEDIA QUERIES ================= */
 @media (max-width: 1024px) {
-  .grid {
-    grid-template-columns: repeat(4, 1fr);
+  .sidebar {
+    width: 220px;
+    min-width: 220px;
+    padding: 24px 16px;
+  }
+  .mainContent {
+    padding: 28px 28px 60px 28px;
+  }
+  .bookStandCard {
+    width: 140px;
+    min-width: 140px;
+  }
+}
+
+@media (max-width: 768px) {
+  .pageLayout {
+    flex-direction: column;
+  }
+  .sidebar {
+    width: 100%;
+    min-width: 100%;
+    height: auto;
+    position: relative;
+    border-right: none;
+    border-bottom: 1px solid rgba(28, 25, 23, 0.08);
+    padding: 16px 20px;
+  }
+  .sidebarTop {
     gap: 16px;
   }
-  .cardContainer {
-    padding: 36px 32px 48px;
-    border-radius: 18px;
+  .navMenu {
+    flex-direction: row;
+    overflow-x: auto;
   }
-  .filterBar {
-    margin-bottom: 36px;
+  .goalCard {
+    display: none;
   }
-}
-
-@media (max-width: 640px) {
-  .pageWrapper {
-    padding: 20px 14px 48px;
+  .sidebarBottom {
+    display: none;
   }
-  .cardContainer {
-    padding: 28px 18px 40px;
-    border-radius: 16px;
+  .mainContent {
+    padding: 20px 16px 60px 16px;
   }
-  .grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
-  }
-  .filterBar {
-    gap: 4px 1px;
-    margin-bottom: 28px;
-  }
-  .filterButton {
-    font-size: 13px;
-    padding: 2px 4px;
-  }
-  .filterSeparator {
-    font-size: 12px;
-  }
-  .modalContent {
+  .modalCard {
     flex-direction: column;
-    max-height: 90vh;
-    overflow-y: auto;
+    padding: 24px;
   }
-  .modalCoverSection {
+  .modalCoverCol {
     width: 100%;
-    aspect-ratio: 16 / 10;
+    min-width: 100%;
+    align-items: center;
   }
-  .modalInfoSection {
-    padding: 24px 20px;
-  }
-  .shelfFooter {
-    flex-direction: column;
-    gap: 12px;
-    align-items: flex-start;
+  .modalCoverWrapper {
+    max-width: 200px;
   }
 }

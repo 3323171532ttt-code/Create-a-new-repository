@@ -20,6 +20,14 @@ export default function Home() {
   // All combined prototypes organized by domain
   const rawPrototypes: PrototypeItem[] = [
     {
+      title: "Inspiration library",
+      description: "Personal visual archive and moodboard space with Better Auth, Supabase Postgres, and masonry layout",
+      path: "/prototypes/inspiration-library",
+      icon: "🖼️",
+      badge: "BETTER AUTH",
+      category: "INTERACTIVE",
+    },
+    {
       title: "3D Doodle Studio",
       description: "Draw spatial neon ribbons in 3D coordinate space with multiple brush geometries and 360° orbit inspection",
       path: "/prototypes/doodle-playground",
@@ -77,7 +85,7 @@ export default function Home() {
     },
     {
       title: "Minimalist bookshelf",
-      description: "Quiet editorial personal library & media collection with 6-column grid and staggered skeleton slots",
+      description: "Quiet editorial personal archive with search, sorting, random discovery, tags, and interactive favorites",
       path: "/prototypes/minimalist-bookshelf",
       icon: "📖",
       badge: "EDITORIAL UI",
